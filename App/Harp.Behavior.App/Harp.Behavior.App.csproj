@@ -32,17 +32,28 @@
     <BaseOutputPath>..\bin\$(Configuration)</BaseOutputPath>
   </PropertyGroup>
 
-  <Target Name="CopyCustomContent" AfterTargets="AfterBuild" Condition="$([MSBuild]::IsOsPlatform('OSX')) or $([MSBuild]::IsOsPlatform('Linux'))">
-    <Copy SourceFiles="..\Harp.Behavior.Design\Assets\cf-logo.icns" DestinationFolder="$(OutDir)" />
-  </Target>
+  <UsingTask
+    Condition="$(RuntimeIdentifier.StartsWith('osx'))"
+    TaskName="NeoBundle.BundleAppTask"
+    AssemblyFile="$(PkgNeoBundle)/lib/netstandard2.1/NeoBundle.dll" />
 
-  <Target Name="CopyCustomContent2" AfterTargets="Publish">
-    <Copy SourceFiles="..\Harp.Behavior.Design\Assets\cf-logo.ico" DestinationFolder="$(OutDir)\publish" />
+  <Target
+    Name="BundleMacApp"
+    AfterTargets="Publish"
+    Condition="$(RuntimeIdentifier.StartsWith('osx'))">
+    <BundleAppTask
+      OutDir="$(OutDir)"
+      Version="$(Version)"
+      Authors="$(Authors)"
+      PublishDir="$(PublishDir)"
+      AppName="$(AssemblyName)"
+      IconFile="cf-logo.icns"
+      Copyright="$(Copyright)"/>
   </Target>
 
   <ItemGroup>
     <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="Dotnet.Bundle" Version="*" />
+    <PackageReference Condition="$(RuntimeIdentifier.StartsWith('osx'))" Include="NeoBundle" Version="1.0.3.1" ExcludeAssets="build;buildTransitive" GeneratePathProperty="true" />
   </ItemGroup>
 
   <ItemGroup>
