@@ -12,13 +12,6 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
-  <Target Name="CopyAssets" AfterTargets="Build">
-    <Copy SourceFiles="Assets\cf-logo.icns" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true"/>
-    <Copy SourceFiles="Assets\cf-logo.ico" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true"/>
-    <Copy SourceFiles="Assets\cf-logo.icns" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true"/>
-    <Copy SourceFiles="Assets\cf-logo.ico" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true"/>
-  </Target>
-
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Controls.ColorPicker" Version="$(AvaloniaVersion)" />
