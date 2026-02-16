@@ -3086,9 +3086,10 @@ public class BehaviorViewModel : ViewModelBase
     public BehaviorViewModel()
     {
         var assembly = typeof(BehaviorViewModel).Assembly;
-        var informationVersion = assembly.GetName().Version;
+        var informationVersion = FileVersionInfo.GetVersionInfo(assembly.Location).ProductVersion;
         if (informationVersion != null)
-            AppVersion = $"v{informationVersion.Major}.{informationVersion.Minor}.{informationVersion.Build}";
+            // remove everything after the + if it exists
+            AppVersion = $"v{informationVersion.Split("+")[0]}";
 
         Ports = new ObservableCollection<string>();
 
