@@ -8,5 +8,6 @@ desktop.ini
 bin
 obj
 Debug
+Release
 packages
 *.componentinfo.xml
