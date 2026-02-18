@@ -5,10 +5,10 @@ CORE_VERSION = 1.15
 
 # Files and directories
 BUILD_DIR = bin
+BUILD_NAME = $(PRJ_NAME)-harp$(CORE_VERSION)
 SRCS = $(wildcard *.c)
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 LIBS = -l$(CORE)-$(CORE_VERSION)
-
 
 # Compiler flags
 CC = avr-gcc
@@ -47,7 +47,13 @@ OBJCOPY_FLAGS = \
 -R .signature \
 -R .user_signatures \
 
-all: $(BUILD_DIR)/$(PRJ_NAME)-harp$(CORE_VERSION).hex
+all: $(BUILD_DIR)/$(BUILD_NAME).hex
+
+clean:
+	rm -f $(OBJS) $(OBJS:.o=.d)
+	rm -f $(BUILD_DIR)/$(BUILD_NAME).elf
+	rm -f $(BUILD_DIR)/$(BUILD_NAME).hex
+	rm -f $(BUILD_DIR)/$(BUILD_NAME).map
 
 $(BUILD_DIR):
 	mkdir "$(BUILD_DIR)"
