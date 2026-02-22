@@ -15,7 +15,43 @@ env:
   CiBuildVersion: ${{github.event.release.tag_name || 'api42.42.42'}}
   AVR_TOOLCHAIN_URL: https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/SoftwareTools/avr8-gnu-toolchain-3.6.2.1778-win32.any.x86.zip
 jobs:
-  build:
+  build-firmware:
+    strategy:
+      fail-fast: false
+      matrix:
+        hardware-target: ['1.1', '1.2', '2.0']
+    name: Build Firmware (hw${{matrix.hardware-target}})
+    runs-on: windows-latest
+    if: github.event_name != 'release'
+    steps:
+      # ----------------------------------------------------------------------- Checkout
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ----------------------------------------------------------------------- Set up tools
+      - name: Set up AVR-GCC
+        run: |
+          Invoke-WebRequest -Uri $env:AVR_TOOLCHAIN_URL -OutFile $HOME\avr8-gnu-toolchain-win32_x86_64.zip
+          Expand-Archive $HOME\avr8-gnu-toolchain-win32_x86_64.zip -DestinationPath $HOME -Force
+          echo "$(Resolve-Path $HOME\avr8-gnu-toolchain-win32_x86\bin)" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      # ----------------------------------------------------------------------- Build firmware
+      - name: Build firmware
+        working-directory: Firmware/Behavior
+        id: build
+        shell: bash
+        run: make all HARDWARE_VERSION=${{matrix.hardware-target}}
+
+      # ----------------------------------------------------------------------- Collect artifacts
+      - name: Collect Firmware binaries
+        uses: actions/upload-artifact@v4
+        if: steps.build.outcome == 'success' && always()
+        with:
+          name: Firmware-hw${{matrix.hardware-target}}
+          if-no-files-found: error
+          path: Firmware/Behavior/bin/*.hex
+
+  build-interface:
     strategy:
       fail-fast: false
       matrix:
@@ -40,12 +76,6 @@ jobs:
       - name: Set up T4
         run: dotnet tool install -g dotnet-t4 --version 3.0.0
 
-      - name: Set up AVR-GCC
-        run: |
-          Invoke-WebRequest -Uri $env:AVR_TOOLCHAIN_URL -OutFile $HOME\avr8-gnu-toolchain-win32_x86_64.zip
-          Expand-Archive $HOME\avr8-gnu-toolchain-win32_x86_64.zip -DestinationPath $HOME -Force
-          echo "$(Resolve-Path $HOME\avr8-gnu-toolchain-win32_x86\bin)" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-
       # ----------------------------------------------------------------------- Regenerate
       - name: Restore generators
         run: dotnet restore Generators
@@ -58,12 +88,6 @@ jobs:
         run: |
           git add . --intent-to-add --ignore-removal
           git diff --name-status --exit-code
-
-      # ----------------------------------------------------------------------- Build firmware
-      - name: Build firmware
-        working-directory: Firmware/Behavior
-        shell: bash
-        run: make all
 
       # ----------------------------------------------------------------------- Build interface package
       - name: Restore interface
@@ -85,14 +109,6 @@ jobs:
           if-no-files-found: error
           path: Interface/bin/${{matrix.configuration}}/**
 
-      - name: Collect Firmware binaries
-        uses: actions/upload-artifact@v4
-        if: matrix.collect-packages && steps.pack.outcome == 'success' && always()
-        with:
-          name: Firmware
-          if-no-files-found: error
-          path: Firmware/Behavior/bin/*.hex
-
   publish-packages-nuget-org:
     name: Publish packages to NuGet.org
     runs-on: ubuntu-latest
@@ -100,7 +116,7 @@ jobs:
       # Needed to attach files to releases
       contents: write
     environment: public-release
-    needs: build
+    needs: [build-firmware, build-interface]
     if: github.event_name == 'release'
     steps:
       # ----------------------------------------------------------------------- Set up .NET
