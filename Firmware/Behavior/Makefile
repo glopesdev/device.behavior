@@ -2,10 +2,14 @@ PRJ_NAME = Behavior
 CORE = ATxmega128A1U
 MCU = atxmega128a1u
 CORE_VERSION = 1.15
+FIRMWARE_VERSION ?= 3.3
+HARDWARE_VERSION ?= 2.0
 
 # Files and directories
 BUILD_DIR = bin
-BUILD_NAME = $(PRJ_NAME)-harp$(CORE_VERSION)
+BUILD_NAME = $(PRJ_NAME)-fw$(FIRMWARE_VERSION)-harp$(CORE_VERSION)-hw$(HARDWARE_VERSION)-ass0
+FW_VERSION_WORDS = $(subst ., ,$(FIRMWARE_VERSION))
+HW_VERSION_WORDS = $(subst ., ,$(HARDWARE_VERSION))
 SRCS = $(wildcard *.c)
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 LIBS = -l$(CORE)-$(CORE_VERSION)
@@ -24,6 +28,10 @@ CFLAGS = \
 -O3 \
 -Wall \
 -mmcu=$(MCU) \
+-DMAJOR_FW_VERSION=$(word 1,$(FW_VERSION_WORDS)) \
+-DMINOR_FW_VERSION=$(word 2,$(FW_VERSION_WORDS)) \
+-DMAJOR_HW_VERSION=$(word 1,$(HW_VERSION_WORDS)) \
+-DMINOR_HW_VERSION=$(word 2,$(HW_VERSION_WORDS)) \
 -std=gnu99
 
 # Linker flags

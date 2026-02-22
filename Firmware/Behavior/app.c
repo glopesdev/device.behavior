@@ -33,11 +33,11 @@ static const uint8_t default_device_name[] = "Behavior";
 void hwbp_app_initialize(void)
 {
     /* Define versions */
-    uint8_t hwH = 2;
-    uint8_t hwL = 0;
-    uint8_t fwH = 3;
-    uint8_t fwL = 3;
-    uint8_t ass = 0;    
+    uint8_t hwH = MAJOR_HW_VERSION;
+    uint8_t hwL = MINOR_HW_VERSION;
+    uint8_t fwH = MAJOR_FW_VERSION;
+    uint8_t fwL = MINOR_FW_VERSION;
+    uint8_t ass = ASSEMBLY_VERSION;
     
    	/* Start core */
    	core_func_start_core(
