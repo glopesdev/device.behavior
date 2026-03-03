@@ -22,7 +22,6 @@ jobs:
         hardware-target: ['1.1', '1.2', '2.0']
     name: Build Firmware (hw${{matrix.hardware-target}})
     runs-on: windows-latest
-    if: github.event_name != 'release'
     steps:
       # ----------------------------------------------------------------------- Checkout
       - name: Checkout
@@ -68,7 +67,6 @@ jobs:
             collect-packages: true
     name: Build Interface
     runs-on: windows-latest
-    if: github.event_name != 'release' || startsWith(github.event.release.tag_name, 'api')
     steps:
       # ----------------------------------------------------------------------- Checkout
       - name: Checkout
