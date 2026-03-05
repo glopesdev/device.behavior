@@ -40,7 +40,7 @@ jobs:
         working-directory: Firmware/Behavior
         id: build
         shell: bash
-        run: make all HARDWARE_VERSION=${{matrix.hardware-target}}
+        run: make all HARDWARE_VERSION=${{matrix.hardware-target}} PREVIEW_VERSION=${{github.run_number}}
 
       # ----------------------------------------------------------------------- Collect artifacts
       - name: Collect Firmware binaries
