@@ -4,12 +4,13 @@
     <WarningsAsErrors>$(WarningsAsErrors);CS7035</WarningsAsErrors>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(ContinuousIntegrationBuild)' == 'true'">
-    <Version Condition="$(CiBuildVersion.StartsWith('api'))">$(CiBuildVersion.Substring(3))</Version>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+  <PropertyGroup>
+    <DevVersion Condition="'$(DevVersion)' == ''">0</DevVersion>
+    <Version>42.42.42-dev$(DevVersion)</Version>
+    <Version Condition="'$(ContinuousIntegrationBuild)' == 'true'">$(CiBuildVersion)</Version>
   </PropertyGroup>
-  <Target Name="VersionSanityChecks" BeforeTargets="build;restore">
+  <Target Name="VersionSanityChecks" BeforeTargets="Build">
     <Error Condition="'$(ContinuousIntegrationBuild)' == 'true' and '$(CiBuildVersion)' == ''" Text="CI version info not configured." />
-    <Error Condition="'api$(Version)' != '$(CiBuildVersion)'" Text="CI version info was not applied correctly." />
+    <Error Condition="'$(PackageVersion)' != '' and '$(PackageVersion)' != '$(Version)'" Text="Do not manually specify PackageVersion." />
   </Target>
 </Project>
