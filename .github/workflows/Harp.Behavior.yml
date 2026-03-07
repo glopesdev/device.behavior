@@ -12,7 +12,6 @@ env:
   DOTNET_CLI_TELEMETRY_OPTOUT: true
   DOTNET_GENERATE_ASPNET_CERTIFICATE: false
   ContinuousIntegrationBuild: true
-  FirmwarePreviewVersion: ${{github.event.release.tag_name || github.run_number}}
   AVR_TOOLCHAIN_URL: https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/SoftwareTools/avr8-gnu-toolchain-3.6.2.1778-win32.any.x86.zip
 jobs:
   build-firmware:
@@ -44,7 +43,7 @@ jobs:
         working-directory: Firmware/Behavior
         id: build
         shell: bash
-        run: make all FIRMWARE_VERSION=${{env.CiBuildVersion}} HARDWARE_VERSION=${{matrix.hardware-target}} PREVIEW_VERSION=${{env.FirmwarePreviewVersion}}
+        run: make all FIRMWARE_VERSION=${{env.CiBuildVersion}} HARDWARE_VERSION=${{matrix.hardware-target}} PREVIEW_VERSION=${{env.CiFirmwarePreviewVersion}}
 
       # ----------------------------------------------------------------------- Collect artifacts
       - name: Collect Firmware binaries
