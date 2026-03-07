@@ -34,12 +34,17 @@ jobs:
           Expand-Archive $HOME\avr8-gnu-toolchain-win32_x86_64.zip -DestinationPath $HOME -Force
           echo "$(Resolve-Path $HOME\avr8-gnu-toolchain-win32_x86\bin)" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
+      # ----------------------------------------------------------------------- Configure build
+      - name: Configure build
+        id: configure-build
+        uses: harp-tech/configure-build@v1
+
       # ----------------------------------------------------------------------- Build firmware
       - name: Build firmware
         working-directory: Firmware/Behavior
         id: build
         shell: bash
-        run: make all HARDWARE_VERSION=${{matrix.hardware-target}} PREVIEW_VERSION=${{env.FirmwarePreviewVersion}}
+        run: make all FIRMWARE_VERSION=${{env.CiBuildVersion}} HARDWARE_VERSION=${{matrix.hardware-target}} PREVIEW_VERSION=${{env.FirmwarePreviewVersion}}
 
       # ----------------------------------------------------------------------- Collect artifacts
       - name: Collect Firmware binaries
@@ -84,7 +89,7 @@ jobs:
       # ----------------------------------------------------------------------- Configure build
       - name: Configure build
         id: configure-build
-        uses: bonsai-rx/configure-build@v1
+        uses: harp-tech/configure-build@v1
 
       # ----------------------------------------------------------------------- Regenerate
       - name: Restore generators
