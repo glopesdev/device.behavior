@@ -1,16 +1,16 @@
-PRJ_NAME = Behavior
 CORE = ATxmega128A1U
 MCU = atxmega128a1u
 CORE_VERSION = 1.15
 PREVIEW_VERSION ?= 0
 
-# Read default version values from app.h if not defined
+# Read build metadata from app.h if not defined
 APP_H_CONTENTS = $(file < app.h)
-finddef = $(filter +%+,$(patsubst #define:$(1):%,+%+,$(subst #define$() $(1)$() ,#define:$(1):,$(APP_H_CONTENTS))))
+finddef = $(filter +%+,$(patsubst #define:$(1):%,+%+,$(subst #define$() $(1)$() ,#define:$(1):,$(strip $(APP_H_CONTENTS)))))
 APP_VERSION_NAMES = $(sort $(filter %_VERSION,$(APP_H_CONTENTS)))
 APP_VERSION_VALUES = $(subst +,,$(foreach name,$(APP_VERSION_NAMES),$(call finddef,$(name))))
 FIRMWARE_VERSION ?= $(word 1,$(APP_VERSION_VALUES)).$(word 3,$(APP_VERSION_VALUES))
 HARDWARE_VERSION ?= $(word 2,$(APP_VERSION_VALUES)).$(word 4,$(APP_VERSION_VALUES))
+PRJ_NAME = $(subst ",,$(subst +,,$(call finddef,DEVICE_NAME)))
 
 # Version flags
 FW_VERSION_WORDS = $(subst ., ,$(firstword $(subst -, ,$(FIRMWARE_VERSION))))
