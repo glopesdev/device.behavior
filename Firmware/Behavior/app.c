@@ -34,7 +34,7 @@ void hwbp_app_initialize(void)
 {   
    	/* Start core */
    	core_func_start_core_V2(
-   	    1216,
+   	    WHO_AM_I,
    	    MAJOR_HW_VERSION, MINOR_HW_VERSION, PATCH_HW_VERSION,
    	    MAJOR_FW_VERSION, MINOR_FW_VERSION, PATCH_FW_VERSION,
    	    (uint8_t*)(&app_regs),
