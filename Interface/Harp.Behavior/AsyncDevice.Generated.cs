@@ -2748,7 +2748,7 @@ namespace Harp.Behavior
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the register payload.
         /// </returns>
-        public async Task<byte> ReadEnableSerialTimestampAsync(CancellationToken cancellationToken = default)
+        public async Task<SerialTimestampPorts> ReadEnableSerialTimestampAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(EnableSerialTimestamp.Address), cancellationToken);
             return EnableSerialTimestamp.GetPayload(reply);
@@ -2764,7 +2764,7 @@ namespace Harp.Behavior
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the timestamped register payload.
         /// </returns>
-        public async Task<Timestamped<byte>> ReadTimestampedEnableSerialTimestampAsync(CancellationToken cancellationToken = default)
+        public async Task<Timestamped<SerialTimestampPorts>> ReadTimestampedEnableSerialTimestampAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(EnableSerialTimestamp.Address), cancellationToken);
             return EnableSerialTimestamp.GetTimestampedPayload(reply);
@@ -2778,7 +2778,7 @@ namespace Harp.Behavior
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>The task object representing the asynchronous write operation.</returns>
-        public async Task WriteEnableSerialTimestampAsync(byte value, CancellationToken cancellationToken = default)
+        public async Task WriteEnableSerialTimestampAsync(SerialTimestampPorts value, CancellationToken cancellationToken = default)
         {
             var request = EnableSerialTimestamp.FromPayload(MessageType.Write, value);
             await CommandAsync(request, cancellationToken);

@@ -386,6 +386,7 @@ registers:
     address: 110
     type: U8
     access: Write
+    maskType: SerialTimestampPorts
     description: Enables the timestamp for serial TX.
   MimicPort0IR: &mimic
     address: 111
@@ -497,6 +498,10 @@ bitMasks:
     description: Specifies that camera frame was acquired.
     bits:
       FrameAcquired: 0x1
+  SerialTimestampPorts:
+    description: Specifies available timestamp TX ports.
+    bits:
+      TimestampPort2: 0x4
 groupMasks:
   MimicOutput:
     description: Specifies the target IO on which to mimic the specified register.

@@ -7162,9 +7162,9 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
-        public static byte GetPayload(HarpMessage message)
+        public static SerialTimestampPorts GetPayload(HarpMessage message)
         {
-            return message.GetPayloadByte();
+            return (SerialTimestampPorts)message.GetPayloadByte();
         }
 
         /// <summary>
@@ -7172,9 +7172,10 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<byte> GetTimestampedPayload(HarpMessage message)
+        public static Timestamped<SerialTimestampPorts> GetTimestampedPayload(HarpMessage message)
         {
-            return message.GetTimestampedPayloadByte();
+            var payload = message.GetTimestampedPayloadByte();
+            return Timestamped.Create((SerialTimestampPorts)payload.Value, payload.Seconds);
         }
 
         /// <summary>
@@ -7186,9 +7187,9 @@ namespace Harp.Behavior
         /// A <see cref="HarpMessage"/> object for the <see cref="EnableSerialTimestamp"/> register
         /// with the specified message type and payload.
         /// </returns>
-        public static HarpMessage FromPayload(MessageType messageType, byte value)
+        public static HarpMessage FromPayload(MessageType messageType, SerialTimestampPorts value)
         {
-            return HarpMessage.FromByte(Address, messageType, value);
+            return HarpMessage.FromByte(Address, messageType, (byte)value);
         }
 
         /// <summary>
@@ -7202,9 +7203,9 @@ namespace Harp.Behavior
         /// A <see cref="HarpMessage"/> object for the <see cref="EnableSerialTimestamp"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
-        public static HarpMessage FromPayload(double timestamp, MessageType messageType, byte value)
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, SerialTimestampPorts value)
         {
-            return HarpMessage.FromByte(Address, timestamp, messageType, value);
+            return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
     }
 
@@ -7226,7 +7227,7 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<byte> GetPayload(HarpMessage message)
+        public static Timestamped<SerialTimestampPorts> GetPayload(HarpMessage message)
         {
             return EnableSerialTimestamp.GetTimestampedPayload(message);
         }
@@ -11643,13 +11644,13 @@ namespace Harp.Behavior
         /// Gets or sets the value that enables the timestamp for serial TX.
         /// </summary>
         [Description("The value that enables the timestamp for serial TX.")]
-        public byte EnableSerialTimestamp { get; set; }
+        public SerialTimestampPorts EnableSerialTimestamp { get; set; }
 
         /// <summary>
         /// Creates a message payload for the EnableSerialTimestamp register.
         /// </summary>
         /// <returns>The created message payload value.</returns>
-        public byte GetPayload()
+        public SerialTimestampPorts GetPayload()
         {
             return EnableSerialTimestamp;
         }
@@ -12367,6 +12368,16 @@ namespace Harp.Behavior
     {
         None = 0x0,
         FrameAcquired = 0x1
+    }
+
+    /// <summary>
+    /// Specifies available timestamp TX ports.
+    /// </summary>
+    [Flags]
+    public enum SerialTimestampPorts : byte
+    {
+        None = 0x0,
+        TimestampPort2 = 0x4
     }
 
     /// <summary>
