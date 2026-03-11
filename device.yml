@@ -4,7 +4,7 @@
 device: Behavior
 whoAmI: 1216
 firmwareVersion: "3.3"
-hardwareTargets: "1.1"
+hardwareTargets: "2.0"
 registers:
   DigitalInputState:
     address: 32

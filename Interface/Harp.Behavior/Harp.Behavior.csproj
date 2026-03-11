@@ -5,7 +5,6 @@
     <Copyright>Copyright © harp-tech and Contributors</Copyright>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
     <Description>Bonsai Library containing interfaces for data acquisition and control of Harp Behavior devices.</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageType>Dependency;BonsaiLibrary</PackageType>
@@ -17,8 +16,6 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageOutputPath>..\bin\$(Configuration)</PackageOutputPath>
     <TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
-    <VersionPrefix>0.2.0</VersionPrefix>
-    <VersionSuffix></VersionSuffix>
     <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
