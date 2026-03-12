@@ -12259,10 +12259,33 @@ namespace Harp.Behavior
     [Flags]
     public enum DigitalInputs : byte
     {
+        /// <summary>
+        /// Specifies that no flags are defined.
+        /// </summary>
         None = 0x0,
+
+        /// <summary>
+        /// Port 0 digital input
+        /// </summary>
+        [Description("Port 0 digital input")]
         DIPort0 = 0x1,
+
+        /// <summary>
+        /// Port 1 digital input
+        /// </summary>
+        [Description("Port 1 digital input")]
         DIPort1 = 0x2,
+
+        /// <summary>
+        /// Port 2 digital input
+        /// </summary>
+        [Description("Port 2 digital input")]
         DIPort2 = 0x4,
+
+        /// <summary>
+        /// Digital input DI3
+        /// </summary>
+        [Description("Digital input DI3")]
         DI3 = 0x8
     }
 
@@ -12320,11 +12343,39 @@ namespace Harp.Behavior
     [Flags]
     public enum Events : byte
     {
+        /// <summary>
+        /// Specifies that no flags are defined.
+        /// </summary>
         None = 0x0,
+
+        /// <summary>
+        /// Event from register DigitalInputState
+        /// </summary>
+        [Description("Event from register DigitalInputState")]
         PortDI = 0x1,
+
+        /// <summary>
+        /// Event from register PortDIOStateEvent
+        /// </summary>
+        [Description("Event from register PortDIOStateEvent")]
         PortDIO = 0x2,
+
+        /// <summary>
+        /// Event from register AnalogData
+        /// </summary>
+        [Description("Event from register AnalogData")]
         AnalogData = 0x4,
+
+        /// <summary>
+        /// Event from register Camera0Frame
+        /// </summary>
+        [Description("Event from register Camera0Frame")]
         Camera0 = 0x8,
+
+        /// <summary>
+        /// Event from register Camera1Frame
+        /// </summary>
+        [Description("Event from register Camera1Frame")]
         Camera1 = 0x10
     }
 
@@ -12334,8 +12385,21 @@ namespace Harp.Behavior
     [Flags]
     public enum CameraOutputs : byte
     {
+        /// <summary>
+        /// Specifies that no flags are defined.
+        /// </summary>
         None = 0x0,
+
+        /// <summary>
+        /// Camera on digital output 0
+        /// </summary>
+        [Description("Camera on digital output 0")]
         CameraOutput0 = 0x1,
+
+        /// <summary>
+        /// Camera on digital output 1
+        /// </summary>
+        [Description("Camera on digital output 1")]
         CameraOutput1 = 0x2
     }
 
@@ -12345,8 +12409,21 @@ namespace Harp.Behavior
     [Flags]
     public enum ServoOutputs : byte
     {
+        /// <summary>
+        /// Specifies that no flags are defined.
+        /// </summary>
         None = 0x0,
+
+        /// <summary>
+        /// Servo on digital output 2
+        /// </summary>
+        [Description("Servo on digital output 2")]
         ServoOutput2 = 0x4,
+
+        /// <summary>
+        /// Servo on digital output 3
+        /// </summary>
+        [Description("Servo on digital output 3")]
         ServoOutput3 = 0x8
     }
 
@@ -12356,7 +12433,15 @@ namespace Harp.Behavior
     [Flags]
     public enum EncoderInputs : byte
     {
+        /// <summary>
+        /// Specifies that no flags are defined.
+        /// </summary>
         None = 0x0,
+
+        /// <summary>
+        /// Encoder on port 2
+        /// </summary>
+        [Description("Encoder on port 2")]
         EncoderPort2 = 0x4
     }
 
@@ -12366,7 +12451,15 @@ namespace Harp.Behavior
     [Flags]
     public enum FrameAcquired : byte
     {
+        /// <summary>
+        /// Specifies that no flags are defined.
+        /// </summary>
         None = 0x0,
+
+        /// <summary>
+        /// Camera frame was triggered
+        /// </summary>
+        [Description("Camera frame was triggered")]
         FrameAcquired = 0x1
     }
 
@@ -12376,7 +12469,15 @@ namespace Harp.Behavior
     [Flags]
     public enum SerialTimestampPorts : byte
     {
+        /// <summary>
+        /// Specifies that no flags are defined.
+        /// </summary>
         None = 0x0,
+
+        /// <summary>
+        /// Enable the serial timestamp TX on Port 2
+        /// </summary>
+        [Description("Enable the serial timestamp TX on Port 2")]
         TimestampPort2 = 0x4
     }
 
@@ -12386,12 +12487,47 @@ namespace Harp.Behavior
     public enum MimicOutput : byte
     {
         None = 0,
+
+        /// <summary>
+        /// Is reflected on DIO0
+        /// </summary>
+        [Description("Is reflected on DIO0")]
         DIO0 = 1,
+
+        /// <summary>
+        /// Is reflected on DIO1
+        /// </summary>
+        [Description("Is reflected on DIO1")]
         DIO1 = 2,
+
+        /// <summary>
+        /// Is reflected on DIO2
+        /// </summary>
+        [Description("Is reflected on DIO2")]
         DIO2 = 3,
+
+        /// <summary>
+        /// Is reflected on DO0
+        /// </summary>
+        [Description("Is reflected on DO0")]
         DO0 = 4,
+
+        /// <summary>
+        /// Is reflected on DO1
+        /// </summary>
+        [Description("Is reflected on DO1")]
         DO1 = 5,
+
+        /// <summary>
+        /// Is reflected on DO2
+        /// </summary>
+        [Description("Is reflected on DO2")]
         DO2 = 6,
+
+        /// <summary>
+        /// Is reflected on DO3
+        /// </summary>
+        [Description("Is reflected on DO3")]
         DO3 = 7
     }
 

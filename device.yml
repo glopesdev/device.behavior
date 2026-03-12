@@ -438,10 +438,18 @@ bitMasks:
   DigitalInputs:
     description: Specifies the state of port digital input lines.
     bits:
-      DIPort0: 0x1
-      DIPort1: 0x2
-      DIPort2: 0x4
-      DI3: 0x8
+      DIPort0:
+        value: 0x1
+        description: Port 0 digital input
+      DIPort1:
+        value: 0x2
+        description: Port 1 digital input
+      DIPort2:
+        value: 0x4
+        description: Port 2 digital input
+      DI3:
+        value: 0x8
+        description: Digital input DI3
   DigitalOutputs:
     description: Specifies the state of port digital output lines.
     bits:
@@ -475,45 +483,83 @@ bitMasks:
   Events:
     description: Specifies the active events in the device.
     bits:
-      PortDI: 0x1
-      PortDIO: 0x2
-      AnalogData: 0x4
-      Camera0: 0x8
-      Camera1: 0x10
+      PortDI:
+        value: 0x1
+        description: Event from register DigitalInputState
+      PortDIO:
+        value: 0x2
+        description: Event from register PortDIOStateEvent
+      AnalogData:
+        value: 0x4
+        description: Event from register AnalogData
+      Camera0:
+        value: 0x8
+        description: Event from register Camera0Frame
+      Camera1:
+        value: 0x10
+        description: Event from register Camera1Frame
   CameraOutputs:
     description: Specifies camera output enable bits.
     bits:
-      CameraOutput0: 0x1
-      CameraOutput1: 0x2
+      CameraOutput0:
+        value: 0x1
+        description: Camera on digital output 0
+      CameraOutput1:
+        value: 0x2
+        description: Camera on digital output 1
   ServoOutputs:
     description: Specifies servo output enable bits.
     bits:
-      ServoOutput2: 0x4
-      ServoOutput3: 0x8
+      ServoOutput2:
+        value: 0x4
+        description: Servo on digital output 2
+      ServoOutput3:
+        value: 0x8
+        description: Servo on digital output 3
   EncoderInputs:
     description: Specifies quadrature counter enable bits.
     bits:
-      EncoderPort2: 0x4
+      EncoderPort2:
+        value: 0x4
+        description: Encoder on port 2
   FrameAcquired:
     description: Specifies that camera frame was acquired.
     bits:
-      FrameAcquired: 0x1
+      FrameAcquired:
+        value: 0x1
+        description: Camera frame was triggered
   SerialTimestampPorts:
     description: Specifies available timestamp TX ports.
     bits:
-      TimestampPort2: 0x4
+      TimestampPort2:
+        value: 0x4
+        description: Enable the serial timestamp TX on Port 2
 groupMasks:
   MimicOutput:
     description: Specifies the target IO on which to mimic the specified register.
     values:
       None: 0
-      DIO0: 1
-      DIO1: 2
-      DIO2: 3
-      DO0: 4
-      DO1: 5
-      DO2: 6
-      DO3: 7
+      DIO0:
+        value: 1
+        description: Is reflected on DIO0
+      DIO1:
+        value: 2
+        description: Is reflected on DIO1
+      DIO2:
+        value: 3
+        description: Is reflected on DIO2
+      DO0:
+        value: 4
+        description: Is reflected on DO0
+      DO1:
+        value: 5
+        description: Is reflected on DO1
+      DO2:
+        value: 6
+        description: Is reflected on DO2
+      DO3:
+        value: 7
+        description: Is reflected on DO3
   EncoderModeConfig:
     description: Specifies the type of reading made from the quadrature encoder.
     values:
