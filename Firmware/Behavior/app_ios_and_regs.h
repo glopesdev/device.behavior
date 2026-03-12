@@ -334,13 +334,13 @@ typedef struct
 /************************************************************************/
 /* Registers' bits                                                      */
 /************************************************************************/
-#define B_DIPORT0                              (1<<0)       // 
-#define B_DIPORT1                              (1<<1)       // 
-#define B_DIPORT2                              (1<<2)       // 
+#define B_DI_PORT0                             (1<<0)       // 
+#define B_DI_PORT1                             (1<<1)       // 
+#define B_DI_PORT2                             (1<<2)       // 
 #define B_DI3                                  (1<<3)       // 
-#define B_DOPORT0                              (1<<0)       // 
-#define B_DOPORT1                              (1<<1)       // 
-#define B_DOPORT2                              (1<<2)       // 
+#define B_DO_PORT0                             (1<<0)       // 
+#define B_DO_PORT1                             (1<<1)       // 
+#define B_DO_PORT2                             (1<<2)       // 
 #define B_SUPPLY_PORT0                         (1<<3)       // 
 #define B_SUPPLY_PORT1                         (1<<4)       // 
 #define B_SUPPLY_PORT2                         (1<<5)       // 

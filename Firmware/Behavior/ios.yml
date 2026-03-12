@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/harp-tech/protocol/refs/heads/main/schema/ios.json
+# yaml-language-server: $schema=https://harp-tech.org/draft-02/schema/ios.json
 DO3:
   pinNumber: 0
   direction: output

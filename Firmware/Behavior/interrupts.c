@@ -38,8 +38,8 @@ ISR(PORTD_INT0_vect, ISR_NAKED)
    uint8_t reg_port_dis = app_regs.REG_DIGITAL_INPUT_STATE;
    uint8_t reg_port_dios_in = app_regs.REG_PORT_DIO_STATE_EVENT; 
    
-   app_regs.REG_DIGITAL_INPUT_STATE &= ~B_DIPORT0;
-   app_regs.REG_DIGITAL_INPUT_STATE |= (read_POKE0_IR) ? B_DIPORT0 : 0;
+   app_regs.REG_DIGITAL_INPUT_STATE &= ~B_DI_PORT0;
+   app_regs.REG_DIGITAL_INPUT_STATE |= (read_POKE0_IR) ? B_DI_PORT0 : 0;
 		
    app_regs.REG_PORT_DIO_STATE_EVENT &= ~B_DIO0;                      
    app_regs.REG_PORT_DIO_STATE_EVENT |= (read_POKE0_IO) ? B_DIO0 : 0; 
@@ -82,8 +82,8 @@ ISR(PORTE_INT0_vect, ISR_NAKED)
    uint8_t reg_port_dis = app_regs.REG_DIGITAL_INPUT_STATE;
    uint8_t reg_port_dios_in = app_regs.REG_PORT_DIO_STATE_EVENT; 
    
-   app_regs.REG_DIGITAL_INPUT_STATE &= ~B_DIPORT1;
-   app_regs.REG_DIGITAL_INPUT_STATE |= (read_POKE1_IR) ? B_DIPORT1 : 0;
+   app_regs.REG_DIGITAL_INPUT_STATE &= ~B_DI_PORT1;
+   app_regs.REG_DIGITAL_INPUT_STATE |= (read_POKE1_IR) ? B_DI_PORT1 : 0;
 	
    app_regs.REG_PORT_DIO_STATE_EVENT &= ~B_DIO1;                       
    app_regs.REG_PORT_DIO_STATE_EVENT |= (read_POKE1_IO) ? B_DIO1 : 0; 
@@ -125,8 +125,8 @@ ISR(PORTF_INT0_vect, ISR_NAKED)
    uint8_t reg_port_dis = app_regs.REG_DIGITAL_INPUT_STATE;
    uint8_t reg_port_dios_in = app_regs.REG_PORT_DIO_STATE_EVENT; 
    
-   app_regs.REG_DIGITAL_INPUT_STATE &= ~B_DIPORT2;
-   app_regs.REG_DIGITAL_INPUT_STATE |= (read_POKE2_IR) ? B_DIPORT2 : 0;
+   app_regs.REG_DIGITAL_INPUT_STATE &= ~B_DI_PORT2;
+   app_regs.REG_DIGITAL_INPUT_STATE |= (read_POKE2_IR) ? B_DI_PORT2 : 0;
 	
    app_regs.REG_PORT_DIO_STATE_EVENT &= ~B_DIO2;                       
    app_regs.REG_PORT_DIO_STATE_EVENT |= (read_POKE2_IO) ? B_DIO2 : 0;

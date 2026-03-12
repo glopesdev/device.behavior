@@ -213,9 +213,9 @@ bool (*app_func_wr_pointer[])(void*) = {
 /************************************************************************/
 void app_read_REG_DIGITAL_INPUT_STATE(void)
 {
-	app_regs.REG_DIGITAL_INPUT_STATE = (read_POKE0_IR) ? B_DIPORT0 : 0;
-	app_regs.REG_DIGITAL_INPUT_STATE |= (read_POKE1_IR) ? B_DIPORT1 : 0;
-	app_regs.REG_DIGITAL_INPUT_STATE |= (read_POKE2_IR) ? B_DIPORT2 : 0;
+	app_regs.REG_DIGITAL_INPUT_STATE = (read_POKE0_IR) ? B_DI_PORT0 : 0;
+	app_regs.REG_DIGITAL_INPUT_STATE |= (read_POKE1_IR) ? B_DI_PORT1 : 0;
+	app_regs.REG_DIGITAL_INPUT_STATE |= (read_POKE2_IR) ? B_DI_PORT2 : 0;
 	app_regs.REG_DIGITAL_INPUT_STATE |= (read_DI3) ? B_DI3 : 0;
 }
 bool app_write_REG_DIGITAL_INPUT_STATE(void *a) { return false; }
@@ -238,9 +238,9 @@ bool app_write_REG_RESERVED0(void *a)
 bool rgb0_on = false;
 bool rgb1_on = false;
 
-#define start_POKE0_LED do {set_POKE0_LED; if (app_regs.REG_OUTPUT_PULSE_ENABLE & B_DOPORT0) pulse_countdown.poke0_led = app_regs.REG_PULSE_DO_PORT0 + 1; } while(0)
-#define start_POKE1_LED do {set_POKE1_LED; if (app_regs.REG_OUTPUT_PULSE_ENABLE & B_DOPORT1) pulse_countdown.poke1_led = app_regs.REG_PULSE_DO_PORT1 + 1; } while(0)
-#define start_POKE2_LED do {set_POKE2_LED; if (app_regs.REG_OUTPUT_PULSE_ENABLE & B_DOPORT2) pulse_countdown.poke2_led = app_regs.REG_PULSE_DO_PORT2 + 1; } while(0)
+#define start_POKE0_LED do {set_POKE0_LED; if (app_regs.REG_OUTPUT_PULSE_ENABLE & B_DO_PORT0) pulse_countdown.poke0_led = app_regs.REG_PULSE_DO_PORT0 + 1; } while(0)
+#define start_POKE1_LED do {set_POKE1_LED; if (app_regs.REG_OUTPUT_PULSE_ENABLE & B_DO_PORT1) pulse_countdown.poke1_led = app_regs.REG_PULSE_DO_PORT1 + 1; } while(0)
+#define start_POKE2_LED do {set_POKE2_LED; if (app_regs.REG_OUTPUT_PULSE_ENABLE & B_DO_PORT2) pulse_countdown.poke2_led = app_regs.REG_PULSE_DO_PORT2 + 1; } while(0)
 
 #define start_POKE0_VALVE do {set_POKE0_VALVE; if (app_regs.REG_OUTPUT_PULSE_ENABLE & B_SUPPLY_PORT0) pulse_countdown.poke0_valve = app_regs.REG_PULSE_SUPPLY_PORT0 + 1; } while(0)
 #define start_POKE1_VALVE do {set_POKE1_VALVE; if (app_regs.REG_OUTPUT_PULSE_ENABLE & B_SUPPLY_PORT1) pulse_countdown.poke1_valve = app_regs.REG_PULSE_SUPPLY_PORT1 + 1; } while(0)
@@ -298,9 +298,9 @@ bool app_write_REG_OUTPUT_SET(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 
-	if (reg & B_DOPORT0) start_POKE0_LED;
-	if (reg & B_DOPORT1) start_POKE1_LED;
-	if (reg & B_DOPORT2) start_POKE2_LED;
+	if (reg & B_DO_PORT0) start_POKE0_LED;
+	if (reg & B_DO_PORT1) start_POKE1_LED;
+	if (reg & B_DO_PORT2) start_POKE2_LED;
 	
 	if (reg & B_SUPPLY_PORT0) start_POKE0_VALVE;
 	if (reg & B_SUPPLY_PORT1) start_POKE1_VALVE;
@@ -336,9 +336,9 @@ bool app_write_REG_OUTPUT_CLEAR(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 
-	if (reg & B_DOPORT0) clr_POKE0_LED;
-	if (reg & B_DOPORT1) clr_POKE1_LED;
-	if (reg & B_DOPORT2) clr_POKE2_LED;
+	if (reg & B_DO_PORT0) clr_POKE0_LED;
+	if (reg & B_DO_PORT1) clr_POKE1_LED;
+	if (reg & B_DO_PORT2) clr_POKE2_LED;
 	
 	if (reg & B_SUPPLY_PORT0) clr_POKE0_VALVE;
 	if (reg & B_SUPPLY_PORT1) clr_POKE1_VALVE;
@@ -374,9 +374,9 @@ bool app_write_REG_OUTPUT_TOGGLE(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 
-	if (reg & B_DOPORT0) { if (read_POKE0_LED) tgl_POKE0_LED; else start_POKE0_LED;}
-	if (reg & B_DOPORT1) { if (read_POKE1_LED) tgl_POKE1_LED; else start_POKE1_LED;}
-	if (reg & B_DOPORT2) { if (read_POKE2_LED) tgl_POKE2_LED; else start_POKE2_LED;}
+	if (reg & B_DO_PORT0) { if (read_POKE0_LED) tgl_POKE0_LED; else start_POKE0_LED;}
+	if (reg & B_DO_PORT1) { if (read_POKE1_LED) tgl_POKE1_LED; else start_POKE1_LED;}
+	if (reg & B_DO_PORT2) { if (read_POKE2_LED) tgl_POKE2_LED; else start_POKE2_LED;}
 	
 	if (reg & B_SUPPLY_PORT0) { if (read_POKE0_VALVE) tgl_POKE0_VALVE; else start_POKE0_VALVE;}
 	if (reg & B_SUPPLY_PORT1) { if (read_POKE1_VALVE) tgl_POKE1_VALVE; else start_POKE1_VALVE;}
@@ -422,9 +422,9 @@ bool app_write_REG_OUTPUT_TOGGLE(void *a)
 /************************************************************************/
 void app_read_REG_OUTPUT_STATE(void)
 {
-	app_regs.REG_OUTPUT_STATE = (read_POKE0_LED) ? B_DOPORT0 : 0;
-	app_regs.REG_OUTPUT_STATE |= (read_POKE1_LED) ? B_DOPORT1 : 0;
-	app_regs.REG_OUTPUT_STATE |= (read_POKE2_LED) ? B_DOPORT2 : 0;
+	app_regs.REG_OUTPUT_STATE = (read_POKE0_LED) ? B_DO_PORT0 : 0;
+	app_regs.REG_OUTPUT_STATE |= (read_POKE1_LED) ? B_DO_PORT1 : 0;
+	app_regs.REG_OUTPUT_STATE |= (read_POKE2_LED) ? B_DO_PORT2 : 0;
 	
 	app_regs.REG_OUTPUT_STATE |= (read_POKE0_VALVE) ? B_SUPPLY_PORT0: 0;
 	app_regs.REG_OUTPUT_STATE |= (read_POKE1_VALVE) ? B_SUPPLY_PORT1: 0;
@@ -450,9 +450,9 @@ bool app_write_REG_OUTPUT_STATE(void *a)
 	prev_rgb0_on = rgb0_on;
 	prev_rgb1_on = rgb1_on;
 	
-	if (reg & B_DOPORT0) start_POKE0_LED; else clr_POKE0_LED;
-	if (reg & B_DOPORT1) start_POKE1_LED; else clr_POKE1_LED;
-	if (reg & B_DOPORT2) start_POKE2_LED; else clr_POKE2_LED;
+	if (reg & B_DO_PORT0) start_POKE0_LED; else clr_POKE0_LED;
+	if (reg & B_DO_PORT1) start_POKE1_LED; else clr_POKE1_LED;
+	if (reg & B_DO_PORT2) start_POKE2_LED; else clr_POKE2_LED;
 	
 	if (reg & B_SUPPLY_PORT0) start_POKE0_VALVE; else clr_POKE0_VALVE;
 	if (reg & B_SUPPLY_PORT1) start_POKE1_VALVE; else clr_POKE1_VALVE;
