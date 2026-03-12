@@ -35,14 +35,14 @@ extern uint8_t int0_enable_counter;
 
 ISR(PORTD_INT0_vect, ISR_NAKED)
 {	
-   uint8_t reg_port_dis = app_regs.REG_PORT_DIS;
-   uint8_t reg_port_dios_in = app_regs.REG_PORT_DIOS_IN; 
+   uint8_t reg_port_dis = app_regs.REG_DIGITAL_INPUT_STATE;
+   uint8_t reg_port_dios_in = app_regs.REG_PORT_DIO_STATE_EVENT; 
    
-   app_regs.REG_PORT_DIS &= ~B_DI0;
-   app_regs.REG_PORT_DIS |= (read_POKE0_IR) ? B_DI0 : 0;
+   app_regs.REG_DIGITAL_INPUT_STATE &= ~B_DIPORT0;
+   app_regs.REG_DIGITAL_INPUT_STATE |= (read_POKE0_IR) ? B_DIPORT0 : 0;
 		
-   app_regs.REG_PORT_DIOS_IN &= ~B_DIO0;                      
-   app_regs.REG_PORT_DIOS_IN |= (read_POKE0_IO) ? B_DIO0 : 0; 
+   app_regs.REG_PORT_DIO_STATE_EVENT &= ~B_DIO0;                      
+   app_regs.REG_PORT_DIO_STATE_EVENT |= (read_POKE0_IO) ? B_DIO0 : 0; 
 	
 	   
    if(read_POKE0_IR)
@@ -50,22 +50,22 @@ ISR(PORTD_INT0_vect, ISR_NAKED)
    else
       mimic_ir_or_valve(app_regs.REG_MIMIC_PORT0_IR, _CLR_IO_);
 
-	if (app_regs.REG_EVNT_ENABLE & B_EVT_PORT_DIS)
+	if (app_regs.REG_EVENT_ENABLE & B_PORT_DI)
 	{
-		if (reg_port_dis != app_regs.REG_PORT_DIS)
+		if (reg_port_dis != app_regs.REG_DIGITAL_INPUT_STATE)
 		{
-			core_func_send_event(ADD_REG_PORT_DIS, true);
+			core_func_send_event(ADD_REG_DIGITAL_INPUT_STATE, true);
 		 
-			if (app_regs.REG_POKE_INPUT_FILTER_MS)
+			if (app_regs.REG_POKE_INPUT_FILTER)
 			{
 				PORTD_INTCTRL &= 0xFC;	// Disable interrupt
-				int0_enable_counter = app_regs.REG_POKE_INPUT_FILTER_MS;
+				int0_enable_counter = app_regs.REG_POKE_INPUT_FILTER;
 			}
 		}
 		
-		if (reg_port_dios_in != app_regs.REG_PORT_DIOS_IN) 
+		if (reg_port_dios_in != app_regs.REG_PORT_DIO_STATE_EVENT) 
 		{
-			core_func_send_event(ADD_REG_PORT_DIOS_IN, true); 
+			core_func_send_event(ADD_REG_PORT_DIO_STATE_EVENT, true); 
 		}
 	}
 
@@ -79,36 +79,36 @@ extern uint8_t int1_enable_counter;
 
 ISR(PORTE_INT0_vect, ISR_NAKED)
 {
-   uint8_t reg_port_dis = app_regs.REG_PORT_DIS;
-   uint8_t reg_port_dios_in = app_regs.REG_PORT_DIOS_IN; 
+   uint8_t reg_port_dis = app_regs.REG_DIGITAL_INPUT_STATE;
+   uint8_t reg_port_dios_in = app_regs.REG_PORT_DIO_STATE_EVENT; 
    
-   app_regs.REG_PORT_DIS &= ~B_DI1;
-   app_regs.REG_PORT_DIS |= (read_POKE1_IR) ? B_DI1 : 0;
+   app_regs.REG_DIGITAL_INPUT_STATE &= ~B_DIPORT1;
+   app_regs.REG_DIGITAL_INPUT_STATE |= (read_POKE1_IR) ? B_DIPORT1 : 0;
 	
-   app_regs.REG_PORT_DIOS_IN &= ~B_DIO1;                       
-   app_regs.REG_PORT_DIOS_IN |= (read_POKE1_IO) ? B_DIO1 : 0; 
+   app_regs.REG_PORT_DIO_STATE_EVENT &= ~B_DIO1;                       
+   app_regs.REG_PORT_DIO_STATE_EVENT |= (read_POKE1_IO) ? B_DIO1 : 0; 
    
    if(read_POKE1_IR)
       mimic_ir_or_valve(app_regs.REG_MIMIC_PORT1_IR, _SET_IO_);
    else
       mimic_ir_or_valve(app_regs.REG_MIMIC_PORT1_IR, _CLR_IO_);
 
-	if (app_regs.REG_EVNT_ENABLE & B_EVT_PORT_DIS)
+	if (app_regs.REG_EVENT_ENABLE & B_PORT_DI)
 	{
-   		if (reg_port_dis != app_regs.REG_PORT_DIS)
+   		if (reg_port_dis != app_regs.REG_DIGITAL_INPUT_STATE)
    		{
-      		core_func_send_event(ADD_REG_PORT_DIS, true);
+      		core_func_send_event(ADD_REG_DIGITAL_INPUT_STATE, true);
 			  
-      		if (app_regs.REG_POKE_INPUT_FILTER_MS)
+      		if (app_regs.REG_POKE_INPUT_FILTER)
       		{
 	      		PORTE_INTCTRL &= 0xFC;	// Disable interrupt
-      			int1_enable_counter = app_regs.REG_POKE_INPUT_FILTER_MS;
+      			int1_enable_counter = app_regs.REG_POKE_INPUT_FILTER;
 			}
    		}
 	
-		if (reg_port_dios_in != app_regs.REG_PORT_DIOS_IN) 
+		if (reg_port_dios_in != app_regs.REG_PORT_DIO_STATE_EVENT) 
 		{
-			core_func_send_event(ADD_REG_PORT_DIOS_IN, true); 
+			core_func_send_event(ADD_REG_PORT_DIO_STATE_EVENT, true); 
 		}
 	}
 
@@ -122,35 +122,35 @@ extern uint8_t int2_enable_counter;
 
 ISR(PORTF_INT0_vect, ISR_NAKED)
 {
-   uint8_t reg_port_dis = app_regs.REG_PORT_DIS;
-   uint8_t reg_port_dios_in = app_regs.REG_PORT_DIOS_IN; 
+   uint8_t reg_port_dis = app_regs.REG_DIGITAL_INPUT_STATE;
+   uint8_t reg_port_dios_in = app_regs.REG_PORT_DIO_STATE_EVENT; 
    
-   app_regs.REG_PORT_DIS &= ~B_DI2;
-   app_regs.REG_PORT_DIS |= (read_POKE2_IR) ? B_DI2 : 0;
+   app_regs.REG_DIGITAL_INPUT_STATE &= ~B_DIPORT2;
+   app_regs.REG_DIGITAL_INPUT_STATE |= (read_POKE2_IR) ? B_DIPORT2 : 0;
 	
-   app_regs.REG_PORT_DIOS_IN &= ~B_DIO2;                       
-   app_regs.REG_PORT_DIOS_IN |= (read_POKE2_IO) ? B_DIO2 : 0;
+   app_regs.REG_PORT_DIO_STATE_EVENT &= ~B_DIO2;                       
+   app_regs.REG_PORT_DIO_STATE_EVENT |= (read_POKE2_IO) ? B_DIO2 : 0;
       
    if(read_POKE2_IR)
       mimic_ir_or_valve(app_regs.REG_MIMIC_PORT2_IR, _SET_IO_);
    else
       mimic_ir_or_valve(app_regs.REG_MIMIC_PORT2_IR, _CLR_IO_);
    
-	if (app_regs.REG_EVNT_ENABLE & B_EVT_PORT_DIS)
+	if (app_regs.REG_EVENT_ENABLE & B_PORT_DI)
 	{
-   		if (reg_port_dis != app_regs.REG_PORT_DIS)
+   		if (reg_port_dis != app_regs.REG_DIGITAL_INPUT_STATE)
    		{
-      		core_func_send_event(ADD_REG_PORT_DIS, true);
+      		core_func_send_event(ADD_REG_DIGITAL_INPUT_STATE, true);
 		  
-      		if (app_regs.REG_POKE_INPUT_FILTER_MS)
+      		if (app_regs.REG_POKE_INPUT_FILTER)
       		{
 	      		PORTF_INTCTRL &= 0xFC;	// Disable interrupt
-      			int2_enable_counter = app_regs.REG_POKE_INPUT_FILTER_MS;
+      			int2_enable_counter = app_regs.REG_POKE_INPUT_FILTER;
 			  }
    		}
-		if (reg_port_dios_in != app_regs.REG_PORT_DIOS_IN)
+		if (reg_port_dios_in != app_regs.REG_PORT_DIO_STATE_EVENT)
 		{
-			core_func_send_event(ADD_REG_PORT_DIOS_IN, true);
+			core_func_send_event(ADD_REG_PORT_DIO_STATE_EVENT, true);
 		}
 	}
 
@@ -162,16 +162,16 @@ ISR(PORTF_INT0_vect, ISR_NAKED)
 /************************************************************************/
 ISR(PORTH_INT0_vect, ISR_NAKED)
 {
-	uint8_t reg_port_dis = app_regs.REG_PORT_DIS;
+	uint8_t reg_port_dis = app_regs.REG_DIGITAL_INPUT_STATE;
 	
-	app_regs.REG_PORT_DIS &= ~B_DI3;
-	app_regs.REG_PORT_DIS |= (read_DI3) ? B_DI3 : 0;
+	app_regs.REG_DIGITAL_INPUT_STATE &= ~B_DI3;
+	app_regs.REG_DIGITAL_INPUT_STATE |= (read_DI3) ? B_DI3 : 0;
 	
-	if (app_regs.REG_EVNT_ENABLE & B_EVT_PORT_DIS)
+	if (app_regs.REG_EVENT_ENABLE & B_PORT_DI)
 	{
-		if (reg_port_dis != app_regs.REG_PORT_DIS)
+		if (reg_port_dis != app_regs.REG_DIGITAL_INPUT_STATE)
 		{
-			core_func_send_event(ADD_REG_PORT_DIS, true);
+			core_func_send_event(ADD_REG_DIGITAL_INPUT_STATE, true);
 		}
 	}
 
@@ -204,10 +204,10 @@ ISR(TCF0_OVF_vect, ISR_NAKED)
     
     if (_states_.camera.do0)
     {
-        if (app_regs.REG_EVNT_ENABLE & B_EVT_CAM0)
+        if (app_regs.REG_EVENT_ENABLE & B_CAMERA0)
         {
-            app_regs.REG_CAM_OUT0_FRAME_ACQUIRED = 1;
-            core_func_send_event(ADD_REG_CAM_OUT0_FRAME_ACQUIRED, true);
+            app_regs.REG_CAMERA0_FRAME = 1;
+            core_func_send_event(ADD_REG_CAMERA0_FRAME, true);
         }
     }
     
@@ -226,7 +226,7 @@ ISR(TCF0_CCA_vect, ISR_NAKED)
             timer_type0_stop(&TCF0);
             _states_.camera.do0 = false;
 				
-				app_regs.REG_STOP_CAMERAS = B_EN_CAM_OUT0;
+				app_regs.REG_STOP_CAMERAS = B_CAMERA_OUTPUT0;
 				core_func_send_event(ADD_REG_STOP_CAMERAS, true);
         }
     }        
@@ -249,10 +249,10 @@ ISR(TCE0_OVF_vect, ISR_NAKED)
           
     if (_states_.camera.do1)
     {
-        if (app_regs.REG_EVNT_ENABLE & B_EVT_CAM1)
+        if (app_regs.REG_EVENT_ENABLE & B_CAMERA1)
         {
-            app_regs.REG_CAM_OUT1_FRAME_ACQUIRED = 1;
-            core_func_send_event(ADD_REG_CAM_OUT1_FRAME_ACQUIRED, true);
+            app_regs.REG_CAMERA1_FRAME = 1;
+            core_func_send_event(ADD_REG_CAMERA1_FRAME, true);
         }
     }       
     
@@ -271,7 +271,7 @@ ISR(TCE0_CCA_vect, ISR_NAKED)
             timer_type0_stop(&TCE0);
             _states_.camera.do1 = false;
             
-            app_regs.REG_STOP_CAMERAS = B_EN_CAM_OUT1;
+            app_regs.REG_STOP_CAMERAS = B_CAMERA_OUTPUT1;
             core_func_send_event(ADD_REG_STOP_CAMERAS, true);
         }
     }        
@@ -327,7 +327,7 @@ ISR(ADCA_CH0_vect, ISR_NAKED)
 		first_adc_channel = false;
 		
 		/* Read ADC0 Channel 0 */
-		app_regs.REG_DATA[0] = ((int16_t)(ADCA_CH0_RES & 0x0FFF)) - AdcOffset;
+		app_regs.REG_ANALOG_DATA[0] = ((int16_t)(ADCA_CH0_RES & 0x0FFF)) - AdcOffset;
 		
 		if (read_ADC1_AVAILABLE)
 		{
@@ -343,22 +343,22 @@ ISR(ADCA_CH0_vect, ISR_NAKED)
 	else
 	{		
 		/* Read ADC0 Channel 2 */
-		app_regs.REG_DATA[2] = ((int16_t)(ADCA_CH0_RES & 0x0FFF)) - AdcOffset;
+		app_regs.REG_ANALOG_DATA[2] = ((int16_t)(ADCA_CH0_RES & 0x0FFF)) - AdcOffset;
 		
 		/* Validate readings */
-		if (app_regs.REG_DATA[0] < 0)
-			app_regs.REG_DATA[0] = 0;			
-		if (app_regs.REG_DATA[2] < 0)
-			app_regs.REG_DATA[2] = 0;
+		if (app_regs.REG_ANALOG_DATA[0] < 0)
+			app_regs.REG_ANALOG_DATA[0] = 0;			
+		if (app_regs.REG_ANALOG_DATA[2] < 0)
+			app_regs.REG_ANALOG_DATA[2] = 0;
 			
 		send_event = true;
 	}
 	
 	if (send_event)
 	{
-		if (app_regs.REG_EVNT_ENABLE & B_EVT_DATA)
+		if (app_regs.REG_EVENT_ENABLE & B_ANALOG_DATA)
 		{
-			core_func_send_event(ADD_REG_DATA, false);
+			core_func_send_event(ADD_REG_ANALOG_DATA, false);
 		}
 	}	
 		

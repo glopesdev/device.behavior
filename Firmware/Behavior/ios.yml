@@ -1,0 +1,134 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/harp-tech/protocol/refs/heads/main/schema/ios.json
+DO3:
+  pinNumber: 0
+  direction: output
+  allowRead: true
+  port: PORTC
+  description: Output DO0
+DO2:
+  pinNumber: 0
+  direction: output
+  allowRead: true
+  port: PORTD
+  description: Output DO1
+DO1:
+  pinNumber: 0
+  direction: output
+  allowRead: true
+  port: PORTE
+  description: Output DO2
+DO0:
+  pinNumber: 0
+  direction: output
+  allowRead: true
+  port: PORTF
+  description: Output DO3
+LED0:
+  pinNumber: 6
+  direction: output
+  allowRead: true
+  invert: true
+  port: PORTB
+  description: Output LED0
+LED1:
+  pinNumber: 5
+  direction: output
+  allowRead: true
+  invert: true
+  port: PORTB
+  description: Output LED1
+RGBS:
+  pinNumber: 5
+  direction: output
+  port: PORTC
+  description: One wire LEDs
+POKE0_IR:
+  pinNumber: 4
+  direction: input
+  triggerMode: toggle
+  interruptPriority: low
+  port: PORTD
+  description: Poke 0 infrared
+POKE0_IO:
+  pinNumber: 5
+  direction: input
+  triggerMode: toggle
+  port: PORTD
+  description: Poke 0 DIO
+POKE0_LED:
+  pinNumber: 6
+  direction: output
+  allowRead: true
+  port: PORTD
+  description: Poke 0 digital output
+POKE0_VALVE:
+  pinNumber: 7
+  direction: output
+  allowRead: true
+  port: PORTD
+  description: Poke 0 Valve
+POKE1_IR:
+  pinNumber: 4
+  direction: input
+  triggerMode: toggle
+  interruptPriority: low
+  port: PORTE
+  description: Poke 1 infrared
+POKE1_IO:
+  pinNumber: 5
+  direction: input
+  triggerMode: toggle
+  port: PORTE
+  description: Poke 1 DIO
+POKE1_LED:
+  pinNumber: 6
+  direction: output
+  allowRead: true
+  port: PORTE
+  description: Poke 1 digital output
+POKE1_VALVE:
+  pinNumber: 7
+  direction: output
+  allowRead: true
+  port: PORTE
+  description: Poke 1 Valve
+POKE2_IR:
+  pinNumber: 4
+  direction: input
+  triggerMode: toggle
+  interruptPriority: low
+  port: PORTF
+  description: Poke 2 infrared
+POKE2_IO:
+  pinNumber: 5
+  direction: input
+  triggerMode: toggle
+  port: PORTF
+  description: Poke 2 DIO
+POKE2_LED:
+  pinNumber: 6
+  direction: output
+  allowRead: true
+  port: PORTF
+  description: Poke 2 digital output
+POKE2_VALVE:
+  pinNumber: 7
+  direction: output
+  allowRead: true
+  port: PORTF
+  description: Poke 2 Valve
+ADC1_AVAILABLE:
+  pinNumber: 0
+  direction: input
+  pinMode: pulldown
+  triggerMode: toggle
+  port: PORTJ
+  description: ADC1 is available on hardware
+DI3:
+  pinNumber: 0
+  direction: input
+  pinMode: tristate
+  triggerMode: toggle
+  interruptPriority: low
+  port: PORTH
+  description: Input DI3

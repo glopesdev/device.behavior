@@ -12,38 +12,40 @@ void mimic_ir_or_valve (uint8_t reg, uint8_t what_t_do);
 /************************************************************************/
 /* Definition of input pins                                             */
 /************************************************************************/
-// POKE0_IR               Description: Poke 0 infrared
-// POKE0_IO               Description: Poke 0 DIO
-// POKE1_IR               Description: Poke 1 infrared
-// POKE1_IO               Description: Poke 1 DIO
-// POKE2_IR               Description: Poke 2 infrared
-// POKE2_IO               Description: Poke 2 DIO
+// POKE0_IR                Description: Poke 0 infrared
+// POKE0_IO                Description: Poke 0 DIO
+// POKE1_IR                Description: Poke 1 infrared
+// POKE1_IO                Description: Poke 1 DIO
+// POKE2_IR                Description: Poke 2 infrared
+// POKE2_IO                Description: Poke 2 DIO
+// ADC1_AVAILABLE          Description: ADC1 is available on hardware
+// DI3                     Description: Input DI3
 
-#define read_POKE0_IR read_io(PORTD, 4)         // POKE0_IR
-#define read_POKE0_IO read_io(PORTD, 5)         // POKE0_IO
-#define read_POKE1_IR read_io(PORTE, 4)         // POKE1_IR
-#define read_POKE1_IO read_io(PORTE, 5)         // POKE1_IO
-#define read_POKE2_IR read_io(PORTF, 4)         // POKE2_IR
-#define read_POKE2_IO read_io(PORTF, 5)         // POKE2_IO
-#define read_ADC1_AVAILABLE read_io(PORTJ, 0)   // ADC1_AVAILABLE
-#define read_DI3 read_io(PORTH, 0)              // DI3
+#define read_POKE0_IR read_io(PORTD, 4)          // POKE0_IR
+#define read_POKE0_IO read_io(PORTD, 5)          // POKE0_IO
+#define read_POKE1_IR read_io(PORTE, 4)          // POKE1_IR
+#define read_POKE1_IO read_io(PORTE, 5)          // POKE1_IO
+#define read_POKE2_IR read_io(PORTF, 4)          // POKE2_IR
+#define read_POKE2_IO read_io(PORTF, 5)          // POKE2_IO
+#define read_ADC1_AVAILABLE read_io(PORTJ, 0)    // ADC1_AVAILABLE
+#define read_DI3 read_io(PORTH, 0)               // DI3
 
 /************************************************************************/
 /* Definition of output pins                                            */
 /************************************************************************/
-// DO3                    Description: Output DO0
-// DO2                    Description: Output DO1
-// DO1                    Description: Output DO2
-// DO0                    Description: Output DO3
-// LED0                   Description: Output LED0
-// LED1                   Description: Output LED1
-// RGBS                   Description: One wire LEDs
-// POKE0_LED              Description: Poke 0 digital output
-// POKE0_VALVE            Description: Poke 0 Valve
-// POKE1_LED              Description: Poke 1 digital output
-// POKE1_VALVE            Description: Poke 1 Valve
-// POKE2_LED              Description: Poke 2 digital output
-// POKE2_VALVE            Description: Poke 2 Valve
+// DO3                     Description: Output DO0
+// DO2                     Description: Output DO1
+// DO1                     Description: Output DO2
+// DO0                     Description: Output DO3
+// LED0                    Description: Output LED0
+// LED1                    Description: Output LED1
+// RGBS                    Description: One wire LEDs
+// POKE0_LED               Description: Poke 0 digital output
+// POKE0_VALVE             Description: Poke 0 Valve
+// POKE1_LED               Description: Poke 1 digital output
+// POKE1_VALVE             Description: Poke 1 Valve
+// POKE2_LED               Description: Poke 2 digital output
+// POKE2_VALVE             Description: Poke 2 Valve
 
 /* DO3 */
 #define set_DO3 set_io(PORTC, 0)
@@ -129,26 +131,26 @@ void mimic_ir_or_valve (uint8_t reg, uint8_t what_t_do);
 /************************************************************************/
 typedef struct
 {
-	uint8_t REG_PORT_DIS;
+    uint8_t REG_DIGITAL_INPUT_STATE;
 	uint8_t REG_RESERVED0;
-	uint16_t REG_OUTPUTS_SET;
-	uint16_t REG_OUTPUTS_CLEAR;
-	uint16_t REG_OUTPUTS_TOGGLE;
-	uint16_t REG_OUTPUTS_OUT;
-	uint8_t REG_PORT_DIOS_SET;
-	uint8_t REG_PORT_DIOS_CLEAR;
-	uint8_t REG_PORT_DIOS_TOGGLE;
-	uint8_t REG_PORT_DIOS_OUT;
-	uint8_t REG_PORT_DIOS_CONF;
-	uint8_t REG_PORT_DIOS_IN;
-	int16_t REG_DATA[3];
-	uint16_t REG_OUTPUT_PULSE_EN;
-	uint16_t REG_PULSE_PORT0_DO;
-	uint16_t REG_PULSE_PORT1_DO;
-	uint16_t REG_PULSE_PORT2_DO;
-	uint16_t REG_PULSE_PORT0_12V;
-	uint16_t REG_PULSE_PORT1_12V;
-	uint16_t REG_PULSE_PORT2_12V;
+    uint16_t REG_OUTPUT_SET;
+    uint16_t REG_OUTPUT_CLEAR;
+    uint16_t REG_OUTPUT_TOGGLE;
+    uint16_t REG_OUTPUT_STATE;
+    uint8_t REG_PORT_DIO_SET;
+    uint8_t REG_PORT_DIO_CLEAR;
+    uint8_t REG_PORT_DIO_TOGGLE;
+    uint8_t REG_PORT_DIO_STATE;
+    uint8_t REG_PORT_DIO_DIRECTION;
+    uint8_t REG_PORT_DIO_STATE_EVENT;
+    int16_t REG_ANALOG_DATA[3];
+    uint16_t REG_OUTPUT_PULSE_ENABLE;
+    uint16_t REG_PULSE_DO_PORT0;
+    uint16_t REG_PULSE_DO_PORT1;
+    uint16_t REG_PULSE_DO_PORT2;
+    uint16_t REG_PULSE_SUPPLY_PORT0;
+    uint16_t REG_PULSE_SUPPLY_PORT1;
+    uint16_t REG_PULSE_SUPPLY_PORT2;
 	uint16_t REG_PULSE_LED0;
 	uint16_t REG_PULSE_LED1;
 	uint16_t REG_PULSE_RGB0;
@@ -157,30 +159,30 @@ typedef struct
 	uint16_t REG_PULSE_DO1;
 	uint16_t REG_PULSE_DO2;
 	uint16_t REG_PULSE_DO3;
-	uint16_t REG_FREQ_DO0;
-	uint16_t REG_FREQ_DO1;
-	uint16_t REG_FREQ_DO2;
-	uint16_t REG_FREQ_DO3;
-	uint8_t REG_DCYCLE_DO0;
-	uint8_t REG_DCYCLE_DO1;
-	uint8_t REG_DCYCLE_DO2;
-	uint8_t REG_DCYCLE_DO3;
+    uint16_t REG_PWM_FREQUENCY_DO0;
+    uint16_t REG_PWM_FREQUENCY_DO1;
+    uint16_t REG_PWM_FREQUENCY_DO2;
+    uint16_t REG_PWM_FREQUENCY_DO3;
+    uint8_t REG_PWM_DUTY_CYCLE_DO0;
+    uint8_t REG_PWM_DUTY_CYCLE_DO1;
+    uint8_t REG_PWM_DUTY_CYCLE_DO2;
+    uint8_t REG_PWM_DUTY_CYCLE_DO3;
 	uint8_t REG_PWM_START;
 	uint8_t REG_PWM_STOP;
-	uint8_t REG_RGBS[6];
+    uint8_t REG_RGB_ALL[6];
 	uint8_t REG_RGB0[3];
 	uint8_t REG_RGB1[3];
 	uint8_t REG_LED0_CURRENT;
 	uint8_t REG_LED1_CURRENT;
 	uint8_t REG_LED0_MAX_CURRENT;
 	uint8_t REG_LED1_MAX_CURRENT;
-	uint8_t REG_EVNT_ENABLE;
+    uint8_t REG_EVENT_ENABLE;
 	uint8_t REG_START_CAMERAS;
 	uint8_t REG_STOP_CAMERAS;
-	uint8_t REG_EN_SERVOS;
-	uint8_t REG_DIS_SERVOS;
-	uint8_t REG_EN_ENCODERS;
-	uint8_t REG_CONF_ENCODERS;
+    uint8_t REG_ENABLE_SERVOS;
+    uint8_t REG_DISABLE_SERVOS;
+    uint8_t REG_ENABLE_ENCODERS;
+    uint8_t REG_ENCODER_MODE;
 	uint8_t REG_RESERVED2;
 	uint8_t REG_RESERVED3;
 	uint8_t REG_RESERVED4;
@@ -189,23 +191,23 @@ typedef struct
 	uint8_t REG_RESERVED7;
 	uint8_t REG_RESERVED8;
 	uint8_t REG_RESERVED9;
-	uint8_t REG_CAM_OUT0_FRAME_ACQUIRED;
-	uint16_t REG_CAM_OUT0_FREQ;
-	uint8_t REG_CAM_OUT1_FRAME_ACQUIRED;
-	uint16_t REG_CAM_OUT1_FREQ;
+    uint8_t REG_CAMERA0_FRAME;
+    uint16_t REG_CAMERA0_FREQUENCY;
+    uint8_t REG_CAMERA1_FRAME;
+    uint16_t REG_CAMERA1_FREQUENCY;
 	uint8_t REG_RESERVED10;
 	uint8_t REG_RESERVED11;
 	uint8_t REG_RESERVED12;
 	uint8_t REG_RESERVED13;
-	uint16_t REG_MOTOR_OUT2_PERIOD;
-	uint16_t REG_MOTOR_OUT2_PULSE;
-	uint16_t REG_MOTOR_OUT3_PERIOD;
-	uint16_t REG_MOTOR_OUT3_PULSE;
+    uint16_t REG_SERVO_MOTOR2_PERIOD;
+    uint16_t REG_SERVO_MOTOR2_PULSE;
+    uint16_t REG_SERVO_MOTOR3_PERIOD;
+    uint16_t REG_SERVO_MOTOR3_PULSE;
 	uint8_t REG_RESERVED14;
 	uint8_t REG_RESERVED15;
 	uint8_t REG_RESERVED16;
 	uint8_t REG_RESERVED17;
-	uint8_t REG_ENCODERS_RESET;
+    uint8_t REG_ENCODER_RESET;
 	uint8_t REG_RESERVED18;
 	uint8_t REG_ENABLE_SERIAL_TIMESTAMP;
 	uint8_t REG_MIMIC_PORT0_IR;
@@ -219,107 +221,107 @@ typedef struct
 	uint8_t REG_MIMIC_PORT2_VALVE;
 	uint8_t REG_RESERVED23;
 	uint8_t REG_RESERVED24;
-	uint8_t REG_POKE_INPUT_FILTER_MS;
+    uint8_t REG_POKE_INPUT_FILTER;
 } AppRegs;
 
 /************************************************************************/
 /* Registers' address                                                   */
 /************************************************************************/
 /* Registers */
-#define ADD_REG_PORT_DIS                    32 // U8     Reflects the state of DI digital lines of each Port
-#define ADD_REG_RESERVED0                   33 // U8     Reserved for future use
-#define ADD_REG_OUTPUTS_SET                 34 // U16    Set the correspondent output
-#define ADD_REG_OUTPUTS_CLEAR               35 // U16    Clear the correspondent output
-#define ADD_REG_OUTPUTS_TOGGLE              36 // U16    Toggle the correspondent output
-#define ADD_REG_OUTPUTS_OUT                 37 // U16    Control the correspondent output
-#define ADD_REG_PORT_DIOS_SET               38 // U8     Set the correspondent DIO
-#define ADD_REG_PORT_DIOS_CLEAR             39 // U8     Clear the correspondent DIO
-#define ADD_REG_PORT_DIOS_TOGGLE            40 // U8     Toggle the correspondent DIO
-#define ADD_REG_PORT_DIOS_OUT               41 // U8     Control the correspondent DIO
-#define ADD_REG_PORT_DIOS_CONF              42 // U8     Set the DIOs direction (1 is output)
-#define ADD_REG_PORT_DIOS_IN                43 // U8     State of the DIOs
-#define ADD_REG_DATA                        44 // I16    Voltage at ADC input and decoder (poke 2) value
-#define ADD_REG_OUTPUT_PULSE_EN             45 // U16    Enable the output pulse for the selected output
-#define ADD_REG_PULSE_PORT0_DO              46 // U16    Configuration of the output pulse [1 : 65535]
-#define ADD_REG_PULSE_PORT1_DO              47 // U16    
-#define ADD_REG_PULSE_PORT2_DO              48 // U16    
-#define ADD_REG_PULSE_PORT0_12V             49 // U16    
-#define ADD_REG_PULSE_PORT1_12V             50 // U16    
-#define ADD_REG_PULSE_PORT2_12V             51 // U16    
-#define ADD_REG_PULSE_LED0                  52 // U16    
-#define ADD_REG_PULSE_LED1                  53 // U16    
-#define ADD_REG_PULSE_RGB0                  54 // U16    
-#define ADD_REG_PULSE_RGB1                  55 // U16    
-#define ADD_REG_PULSE_DO0                   56 // U16    
-#define ADD_REG_PULSE_DO1                   57 // U16    
-#define ADD_REG_PULSE_DO2                   58 // U16    
-#define ADD_REG_PULSE_DO3                   59 // U16    
-#define ADD_REG_FREQ_DO0                    60 // U16    Frequency of the output [1 : TBD]
-#define ADD_REG_FREQ_DO1                    61 // U16    
-#define ADD_REG_FREQ_DO2                    62 // U16    
-#define ADD_REG_FREQ_DO3                    63 // U16    
-#define ADD_REG_DCYCLE_DO0                  64 // U8     Dutycycle of the output [1 : 99]
-#define ADD_REG_DCYCLE_DO1                  65 // U8     
-#define ADD_REG_DCYCLE_DO2                  66 // U8     
-#define ADD_REG_DCYCLE_DO3                  67 // U8     
-#define ADD_REG_PWM_START                   68 // U8     Start the PWM output on the selected output
-#define ADD_REG_PWM_STOP                    69 // U8     Stop the PWM output on the selected output
-#define ADD_REG_RGBS                        70 // U8     [RGB0 Green] [RGB0  Red] [RGB0 Blue] [RGB1 Green] [RGB1  Red] [RGB1 Blue]
-#define ADD_REG_RGB0                        71 // U8     [RGB0 Green] [RGB0  Red] [RGB0 Blue]
-#define ADD_REG_RGB1                        72 // U8     [RGB1 Green] [RGB1  Red] [RGB1 Blue]
-#define ADD_REG_LED0_CURRENT                73 // U8     Configuration of current to drive LED 0 [2:100]
-#define ADD_REG_LED1_CURRENT                74 // U8     Configuration of current to drive LED 1 [2:100]
-#define ADD_REG_LED0_MAX_CURRENT            75 // U8     Configuration of current to drive LED 0 [5:100]
-#define ADD_REG_LED1_MAX_CURRENT            76 // U8     Configuration of current to drive LED 1 [5:100]
-#define ADD_REG_EVNT_ENABLE                 77 // U8     Enable the Events
-#define ADD_REG_START_CAMERAS               78 // U8     Enable cameras
-#define ADD_REG_STOP_CAMERAS                79 // U8     Disable cameras
-#define ADD_REG_EN_SERVOS                   80 // U8     Enable servo motors control
-#define ADD_REG_DIS_SERVOS                  81 // U8     Disable servo motors control
-#define ADD_REG_EN_ENCODERS                 82 // U8     Enable encoders
-#define ADD_REG_CONF_ENCODERS               83 // U8     Configure the operation mode of the quadrature encoders
-#define ADD_REG_RESERVED2                   84 // U8     Reserved for future use
-#define ADD_REG_RESERVED3                   85 // U8     Reserved for future use
-#define ADD_REG_RESERVED4                   86 // U8     Reserved for future use
-#define ADD_REG_RESERVED5                   87 // U8     Reserved for future use
-#define ADD_REG_RESERVED6                   88 // U8     Reserved for future use
-#define ADD_REG_RESERVED7                   89 // U8     Reserved for future use
-#define ADD_REG_RESERVED8                   90 // U8     Reserved for future use
-#define ADD_REG_RESERVED9                   91 // U8     Reserved for future use
-#define ADD_REG_CAM_OUT0_FRAME_ACQUIRED     92 // U8     
-#define ADD_REG_CAM_OUT0_FREQ               93 // U16    Configures the camera's sample frequency [1;600]
-#define ADD_REG_CAM_OUT1_FRAME_ACQUIRED     94 // U8     
-#define ADD_REG_CAM_OUT1_FREQ               95 // U16    Configures the camera's sample frequency [1;600]
-#define ADD_REG_RESERVED10                  96 // U8     Reserved for future use
-#define ADD_REG_RESERVED11                  97 // U8     Reserved for future use
-#define ADD_REG_RESERVED12                  98 // U8     Reserved for future use
-#define ADD_REG_RESERVED13                  99 // U8     Reserved for future use
-#define ADD_REG_MOTOR_OUT2_PERIOD          100 // U16    Configures the servo motor period (us)  (sensitive to 2 us)
-#define ADD_REG_MOTOR_OUT2_PULSE           101 // U16    Configures the servo motor pulse (us)  (sensitive to 2 us)
-#define ADD_REG_MOTOR_OUT3_PERIOD          102 // U16    Configures the servo motor period (us)  (sensitive to 2 us)
-#define ADD_REG_MOTOR_OUT3_PULSE           103 // U16    Configures the servo motor pulse (us)  (sensitive to 2 us)
+#define ADD_REG_DIGITAL_INPUT_STATE        32 // U8     Reflects the state of DI digital lines of each Port
+#define ADD_REG_RESERVED0                  33 // U8     Reserved for future use
+#define ADD_REG_OUTPUT_SET                 34 // U16    Set the specified digital output lines.
+#define ADD_REG_OUTPUT_CLEAR               35 // U16    Clear the specified digital output lines
+#define ADD_REG_OUTPUT_TOGGLE              36 // U16    Toggle the specified digital output lines
+#define ADD_REG_OUTPUT_STATE               37 // U16    Write the state of all digital output lines
+#define ADD_REG_PORT_DIO_SET               38 // U8     Set the specified port DIO lines
+#define ADD_REG_PORT_DIO_CLEAR             39 // U8     Clear the specified port DIO lines
+#define ADD_REG_PORT_DIO_TOGGLE            40 // U8     Toggle the specified port DIO lines
+#define ADD_REG_PORT_DIO_STATE             41 // U8     Write the state of all port DIO lines
+#define ADD_REG_PORT_DIO_DIRECTION         42 // U8     Specifies which of the port DIO lines are outputs
+#define ADD_REG_PORT_DIO_STATE_EVENT       43 // U8     Specifies the state of the port DIO lines on a line change
+#define ADD_REG_ANALOG_DATA                44 // I16    Voltage at the ADC input and encoder value on Port 2
+#define ADD_REG_OUTPUT_PULSE_ENABLE        45 // U16    Enables the pulse function for the specified output lines
+#define ADD_REG_PULSE_DO_PORT0             46 // U16    Specifies the duration of the output pulse in milliseconds.
+#define ADD_REG_PULSE_DO_PORT1             47 // U16    Specifies the duration of the output pulse in milliseconds.
+#define ADD_REG_PULSE_DO_PORT2             48 // U16    Specifies the duration of the output pulse in milliseconds.
+#define ADD_REG_PULSE_SUPPLY_PORT0         49 // U16    Specifies the duration of the output pulse in milliseconds.
+#define ADD_REG_PULSE_SUPPLY_PORT1         50 // U16    Specifies the duration of the output pulse in milliseconds.
+#define ADD_REG_PULSE_SUPPLY_PORT2         51 // U16    Specifies the duration of the output pulse in milliseconds.
+#define ADD_REG_PULSE_LED0                 52 // U16    Specifies the duration of the output pulse in milliseconds.
+#define ADD_REG_PULSE_LED1                 53 // U16    Specifies the duration of the output pulse in milliseconds.
+#define ADD_REG_PULSE_RGB0                 54 // U16    Specifies the duration of the output pulse in milliseconds.
+#define ADD_REG_PULSE_RGB1                 55 // U16    Specifies the duration of the output pulse in milliseconds.
+#define ADD_REG_PULSE_DO0                  56 // U16    Specifies the duration of the output pulse in milliseconds.
+#define ADD_REG_PULSE_DO1                  57 // U16    Specifies the duration of the output pulse in milliseconds.
+#define ADD_REG_PULSE_DO2                  58 // U16    Specifies the duration of the output pulse in milliseconds.
+#define ADD_REG_PULSE_DO3                  59 // U16    Specifies the duration of the output pulse in milliseconds.
+#define ADD_REG_PWM_FREQUENCY_DO0          60 // U16    Specifies the frequency of the PWM at DO0.
+#define ADD_REG_PWM_FREQUENCY_DO1          61 // U16    Specifies the frequency of the PWM at DO1.
+#define ADD_REG_PWM_FREQUENCY_DO2          62 // U16    Specifies the frequency of the PWM at DO2.
+#define ADD_REG_PWM_FREQUENCY_DO3          63 // U16    Specifies the frequency of the PWM at DO3.
+#define ADD_REG_PWM_DUTY_CYCLE_DO0         64 // U8     Specifies the duty cycle of the PWM at DO0.
+#define ADD_REG_PWM_DUTY_CYCLE_DO1         65 // U8     Specifies the duty cycle of the PWM at DO1.
+#define ADD_REG_PWM_DUTY_CYCLE_DO2         66 // U8     Specifies the duty cycle of the PWM at DO2.
+#define ADD_REG_PWM_DUTY_CYCLE_DO3         67 // U8     Specifies the duty cycle of the PWM at DO3.
+#define ADD_REG_PWM_START                  68 // U8     Starts the PWM on the selected output lines.
+#define ADD_REG_PWM_STOP                   69 // U8     Stops the PWM on the selected output lines.
+#define ADD_REG_RGB_ALL                    70 // U8     Specifies the state of all RGB LED channels.
+#define ADD_REG_RGB0                       71 // U8     Specifies the state of the RGB0 LED channels.
+#define ADD_REG_RGB1                       72 // U8     Specifies the state of the RGB1 LED channels.
+#define ADD_REG_LED0_CURRENT               73 // U8     Specifies the configuration of current to drive LED 0.
+#define ADD_REG_LED1_CURRENT               74 // U8     Specifies the configuration of current to drive LED 1.
+#define ADD_REG_LED0_MAX_CURRENT           75 // U8     Specifies the configuration of current to drive LED 0.
+#define ADD_REG_LED1_MAX_CURRENT           76 // U8     Specifies the configuration of current to drive LED 1.
+#define ADD_REG_EVENT_ENABLE               77 // U8     Specifies the active events in the device.
+#define ADD_REG_START_CAMERAS              78 // U8     Specifies the camera outputs to enable in the device.
+#define ADD_REG_STOP_CAMERAS               79 // U8     Specifies the camera outputs to disable in the device. An event will be issued when the trigger signal is actually stopped being generated.
+#define ADD_REG_ENABLE_SERVOS              80 // U8     Specifies the servo outputs to enable in the device.
+#define ADD_REG_DISABLE_SERVOS             81 // U8     Specifies the servo outputs to disable in the device.
+#define ADD_REG_ENABLE_ENCODERS            82 // U8     Specifies the port quadrature counters to enable in the device.
+#define ADD_REG_ENCODER_MODE               83 // U8     Configures the operation mode of the quadrature encoders.
+#define ADD_REG_RESERVED2                  84 // U8     Reserved for future use
+#define ADD_REG_RESERVED3                  85 // U8     Reserved for future use
+#define ADD_REG_RESERVED4                  86 // U8     Reserved for future use
+#define ADD_REG_RESERVED5                  87 // U8     Reserved for future use
+#define ADD_REG_RESERVED6                  88 // U8     Reserved for future use
+#define ADD_REG_RESERVED7                  89 // U8     Reserved for future use
+#define ADD_REG_RESERVED8                  90 // U8     Reserved for future use
+#define ADD_REG_RESERVED9                  91 // U8     Reserved for future use
+#define ADD_REG_CAMERA0_FRAME              92 // U8     Specifies that a frame was acquired on camera 0.
+#define ADD_REG_CAMERA0_FREQUENCY          93 // U16    Specifies the trigger frequency for camera 0.
+#define ADD_REG_CAMERA1_FRAME              94 // U8     Specifies that a frame was acquired on camera 1.
+#define ADD_REG_CAMERA1_FREQUENCY          95 // U16    Specifies the trigger frequency for camera 1.
+#define ADD_REG_RESERVED10                 96 // U8     Reserved for future use
+#define ADD_REG_RESERVED11                 97 // U8     Reserved for future use
+#define ADD_REG_RESERVED12                 98 // U8     Reserved for future use
+#define ADD_REG_RESERVED13                 99 // U8     Reserved for future use
+#define ADD_REG_SERVO_MOTOR2_PERIOD        100 // U16    Specifies the period of the servo motor in DO2, in microseconds.
+#define ADD_REG_SERVO_MOTOR2_PULSE         101 // U16    Specifies the pulse of the servo motor in DO2, in microseconds.
+#define ADD_REG_SERVO_MOTOR3_PERIOD        102 // U16    Specifies the period of the servo motor in DO3, in microseconds.
+#define ADD_REG_SERVO_MOTOR3_PULSE         103 // U16    Specifies the pulse of the servo motor in DO3, in microseconds.
 #define ADD_REG_RESERVED14                 104 // U8     Reserved for future use
 #define ADD_REG_RESERVED15                 105 // U8     Reserved for future use
 #define ADD_REG_RESERVED16                 106 // U8     Reserved for future use
 #define ADD_REG_RESERVED17                 107 // U8     Reserved for future use
-#define ADD_REG_ENCODERS_RESET             108 // U8     Resets the encoders counter to ZERO
+#define ADD_REG_ENCODER_RESET              108 // U8     Reset the counter of the specified encoders to zero.
 #define ADD_REG_RESERVED18                 109 // U8     Reserved for future use
-#define ADD_REG_ENABLE_SERIAL_TIMESTAMP    110 // U8     Enables the timestamp TX
-#define ADD_REG_MIMIC_PORT0_IR             111 // U8     
-#define ADD_REG_MIMIC_PORT1_IR             112 // U8     
-#define ADD_REG_MIMIC_PORT2_IR             113 // U8     
-#define ADD_REG_RESERVED20                 114 // U8     
-#define ADD_REG_RESERVED21                 115 // U8     
-#define ADD_REG_RESERVED22                 116 // U8     
-#define ADD_REG_MIMIC_PORT0_VALVE          117 // U8     
-#define ADD_REG_MIMIC_PORT1_VALVE          118 // U8     
-#define ADD_REG_MIMIC_PORT2_VALVE          119 // U8     
-#define ADD_REG_RESERVED23                 120 // U8     
-#define ADD_REG_RESERVED24                 121 // U8     
-#define ADD_REG_POKE_INPUT_FILTER_MS       122 // U8     Set the low pass filter time value for the pokes inputs (ms)
+#define ADD_REG_ENABLE_SERIAL_TIMESTAMP    110 // U8     Enables the timestamp for serial TX.
+#define ADD_REG_MIMIC_PORT0_IR             111 // U8     Specifies the digital output to mimic the Port 0 IR state.
+#define ADD_REG_MIMIC_PORT1_IR             112 // U8     Specifies the digital output to mimic the Port 1 IR state.
+#define ADD_REG_MIMIC_PORT2_IR             113 // U8     Specifies the digital output to mimic the Port 2 IR state.
+#define ADD_REG_RESERVED20                 114 // U8     Reserved for future use
+#define ADD_REG_RESERVED21                 115 // U8     Reserved for future use
+#define ADD_REG_RESERVED22                 116 // U8     Reserved for future use
+#define ADD_REG_MIMIC_PORT0_VALVE          117 // U8     Specifies the digital output to mimic the Port 0 valve state.
+#define ADD_REG_MIMIC_PORT1_VALVE          118 // U8     Specifies the digital output to mimic the Port 1 valve state.
+#define ADD_REG_MIMIC_PORT2_VALVE          119 // U8     Specifies the digital output to mimic the Port 2 valve state.
+#define ADD_REG_RESERVED23                 120 // U8     Reserved for future use
+#define ADD_REG_RESERVED24                 121 // U8     Reserved for future use
+#define ADD_REG_POKE_INPUT_FILTER          122 // U8     Specifies the low pass filter time value for poke inputs, in ms.
 
 /************************************************************************/
-/* PWM Generator registers' memory limits                               */
+/* Behavior registers' memory limits                                    */
 /*                                                                      */
 /* DON'T change the APP_REGS_ADD_MIN value !!!                          */
 /* DON'T change these names !!!                                         */
@@ -332,55 +334,54 @@ typedef struct
 /************************************************************************/
 /* Registers' bits                                                      */
 /************************************************************************/
-#define B_DI0                              (1<<0)       // Port 0 digital input
-#define B_DI1                              (1<<1)       // Port 1 digital input
-#define B_DI2                              (1<<2)       // Port 2 digital input
-#define B_DI3                              (1<<3)       // Digital input DI3
-#define B_PORT0_DO                         (1<<0)       // 
-#define B_PORT1_DO                         (1<<1)       // 
-#define B_PORT2_DO                         (1<<2)       // 
-#define B_PORT0_12V                        (1<<3)       // 
-#define B_PORT1_12V                        (1<<4)       // 
-#define B_PORT2_12V                        (1<<5)       // 
-#define B_LED0                             (1<<6)       // 
-#define B_LED1                             (1<<7)       // 
-#define B_RGB0                             (1<<8)       // 
-#define B_RGB1                             (1<<9)       // 
-#define B_DO0                              (1<<10)      // 
-#define B_DO1                              (1<<11)      // 
-#define B_DO2                              (1<<12)      // 
-#define B_DO3                              (1<<13)      // 
-#define B_DIO0                             (1<<0)       // 
-#define B_DIO1                             (1<<1)       // 
-#define B_DIO2                             (1<<2)       // 
-#define B_PWM_DO0                          (1<<0)       // 
-#define B_PWM_DO1                          (1<<1)       // 
-#define B_PWM_DO2                          (1<<2)       // 
-#define B_PWM_DO3                          (1<<3)       // 
-#define B_EVT_PORT_DIS                     (1<<0)       // Event of register POKE_IN
-#define B_EVT_PORT_DIOS_IN                 (1<<1)       // Event of register POKE_DIOS_IN
-#define B_EVT_DATA                         (1<<2)       // Event of register ADC
-#define B_EVT_CAM0                         (1<<3)       // Event of CAM_OUT0_FRAME_ACQUIRED
-#define B_EVT_CAM1                         (1<<4)       // Event of CAM_OUT1_FRAME_ACQUIRED
-#define B_EN_CAM_OUT0                      (1<<0)       // Camera on digital output 0
-#define B_EN_CAM_OUT1                      (1<<1)       // Camera on digital output 1
-#define B_EN_SERVO_OUT2                    (1<<2)       // Servo on digital output 2
-#define B_EN_SERVO_OUT3                    (1<<3)       // Servo on digital output 3
-#define B_EN_ENCODER_PORT2                 (1<<2)       // Encoder on port 2
-#define MSK_ENCODERS_MODE                  0x01         // 
-#define GM_POSITION                        0x00         // 
-#define GM_DISPLACEMENT                    0x01         // 
-#define B_CAM_ACQ                          (1<<0)       // Camera frame was triggered
-#define B_RST_ENCODER_PORT2                (1<<2)       // Reset the encoder counter on Port 2
-#define B_EN_SRL_TSTAMP_PORT2              (1<<2)       // Enable the serial timestamp TX on Port 2
-#define MSK_MIMIC                          0x0F         // 
-#define GM_MIMIC_NONE                      0x00         // 
-#define GM_MIMIC_DIO0                      0x01         // Is reflected on DIO0
-#define GM_MIMIC_DIO1                      0x02         // Is reflected on DIO1
-#define GM_MIMIC_DIO2                      0x03         // Is reflected on DIO2
-#define GM_MIMIC_DO0                       0x04         // Is reflected on DO0
-#define GM_MIMIC_DO1                       0x05         // Is reflected on DO1
-#define GM_MIMIC_DO2                       0x06         // Is reflected on DO2
-#define GM_MIMIC_DO3                       0x07         // Is reflected on DO3
+#define B_DIPORT0                              (1<<0)       // 
+#define B_DIPORT1                              (1<<1)       // 
+#define B_DIPORT2                              (1<<2)       // 
+#define B_DI3                                  (1<<3)       // 
+#define B_DOPORT0                              (1<<0)       // 
+#define B_DOPORT1                              (1<<1)       // 
+#define B_DOPORT2                              (1<<2)       // 
+#define B_SUPPLY_PORT0                         (1<<3)       // 
+#define B_SUPPLY_PORT1                         (1<<4)       // 
+#define B_SUPPLY_PORT2                         (1<<5)       // 
+#define B_LED0                                 (1<<6)       // 
+#define B_LED1                                 (1<<7)       // 
+#define B_RGB0                                 (1<<8)       // 
+#define B_RGB1                                 (1<<9)       // 
+#define B_DO0                                  (1<<10)      // 
+#define B_DO1                                  (1<<11)      // 
+#define B_DO2                                  (1<<12)      // 
+#define B_DO3                                  (1<<13)      // 
+#define B_DIO0                                 (1<<0)       // 
+#define B_DIO1                                 (1<<1)       // 
+#define B_DIO2                                 (1<<2)       // 
+#define B_PWM_DO0                              (1<<0)       // 
+#define B_PWM_DO1                              (1<<1)       // 
+#define B_PWM_DO2                              (1<<2)       // 
+#define B_PWM_DO3                              (1<<3)       // 
+#define B_PORT_DI                              (1<<0)       // 
+#define B_PORT_DIO                             (1<<1)       // 
+#define B_ANALOG_DATA                          (1<<2)       // 
+#define B_CAMERA0                              (1<<3)       // 
+#define B_CAMERA1                              (1<<4)       // 
+#define B_CAMERA_OUTPUT0                       (1<<0)       // 
+#define B_CAMERA_OUTPUT1                       (1<<1)       // 
+#define B_SERVO_OUTPUT2                        (1<<2)       // 
+#define B_SERVO_OUTPUT3                        (1<<3)       // 
+#define B_ENCODER_PORT2                        (1<<2)       // 
+#define B_FRAME_ACQUIRED                       (1<<0)       // 
+#define B_TIMESTAMP_PORT2                      (1<<2)       // 
+#define MSK_MIMIC_OUTPUT_SEL                   0x07         // 
+#define GM_MIMIC_OUTPUT_NONE                   0x00         // 
+#define GM_MIMIC_OUTPUT_DIO0                   0x01         // 
+#define GM_MIMIC_OUTPUT_DIO1                   0x02         // 
+#define GM_MIMIC_OUTPUT_DIO2                   0x03         // 
+#define GM_MIMIC_OUTPUT_DO0                    0x04         // 
+#define GM_MIMIC_OUTPUT_DO1                    0x05         // 
+#define GM_MIMIC_OUTPUT_DO2                    0x06         // 
+#define GM_MIMIC_OUTPUT_DO3                    0x07         // 
+#define MSK_ENCODER_MODE_CONFIG_SEL            0x01         // 
+#define GM_ENCODER_MODE_CONFIG_POSITION        0x00         // 
+#define GM_ENCODER_MODE_CONFIG_DISPLACEMENT    0x01         // 
 
 #endif /* _APP_REGS_H_ */
