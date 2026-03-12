@@ -296,29 +296,29 @@ typedef struct
 #define ADD_REG_RESERVED11                 97 // U8     Reserved for future use
 #define ADD_REG_RESERVED12                 98 // U8     Reserved for future use
 #define ADD_REG_RESERVED13                 99 // U8     Reserved for future use
-#define ADD_REG_SERVO_MOTOR2_PERIOD        100 // U16    Specifies the period of the servo motor in DO2, in microseconds.
-#define ADD_REG_SERVO_MOTOR2_PULSE         101 // U16    Specifies the pulse of the servo motor in DO2, in microseconds.
-#define ADD_REG_SERVO_MOTOR3_PERIOD        102 // U16    Specifies the period of the servo motor in DO3, in microseconds.
-#define ADD_REG_SERVO_MOTOR3_PULSE         103 // U16    Specifies the pulse of the servo motor in DO3, in microseconds.
-#define ADD_REG_RESERVED14                 104 // U8     Reserved for future use
-#define ADD_REG_RESERVED15                 105 // U8     Reserved for future use
-#define ADD_REG_RESERVED16                 106 // U8     Reserved for future use
-#define ADD_REG_RESERVED17                 107 // U8     Reserved for future use
-#define ADD_REG_ENCODER_RESET              108 // U8     Reset the counter of the specified encoders to zero.
-#define ADD_REG_RESERVED18                 109 // U8     Reserved for future use
-#define ADD_REG_ENABLE_SERIAL_TIMESTAMP    110 // U8     Enables the timestamp for serial TX.
-#define ADD_REG_MIMIC_PORT0_IR             111 // U8     Specifies the digital output to mimic the Port 0 IR state.
-#define ADD_REG_MIMIC_PORT1_IR             112 // U8     Specifies the digital output to mimic the Port 1 IR state.
-#define ADD_REG_MIMIC_PORT2_IR             113 // U8     Specifies the digital output to mimic the Port 2 IR state.
-#define ADD_REG_RESERVED20                 114 // U8     Reserved for future use
-#define ADD_REG_RESERVED21                 115 // U8     Reserved for future use
-#define ADD_REG_RESERVED22                 116 // U8     Reserved for future use
-#define ADD_REG_MIMIC_PORT0_VALVE          117 // U8     Specifies the digital output to mimic the Port 0 valve state.
-#define ADD_REG_MIMIC_PORT1_VALVE          118 // U8     Specifies the digital output to mimic the Port 1 valve state.
-#define ADD_REG_MIMIC_PORT2_VALVE          119 // U8     Specifies the digital output to mimic the Port 2 valve state.
-#define ADD_REG_RESERVED23                 120 // U8     Reserved for future use
-#define ADD_REG_RESERVED24                 121 // U8     Reserved for future use
-#define ADD_REG_POKE_INPUT_FILTER          122 // U8     Specifies the low pass filter time value for poke inputs, in ms.
+#define ADD_REG_SERVO_MOTOR2_PERIOD       100 // U16    Specifies the period of the servo motor in DO2, in microseconds.
+#define ADD_REG_SERVO_MOTOR2_PULSE        101 // U16    Specifies the pulse of the servo motor in DO2, in microseconds.
+#define ADD_REG_SERVO_MOTOR3_PERIOD       102 // U16    Specifies the period of the servo motor in DO3, in microseconds.
+#define ADD_REG_SERVO_MOTOR3_PULSE        103 // U16    Specifies the pulse of the servo motor in DO3, in microseconds.
+#define ADD_REG_RESERVED14                104 // U8     Reserved for future use
+#define ADD_REG_RESERVED15                105 // U8     Reserved for future use
+#define ADD_REG_RESERVED16                106 // U8     Reserved for future use
+#define ADD_REG_RESERVED17                107 // U8     Reserved for future use
+#define ADD_REG_ENCODER_RESET             108 // U8     Reset the counter of the specified encoders to zero.
+#define ADD_REG_RESERVED18                109 // U8     Reserved for future use
+#define ADD_REG_ENABLE_SERIAL_TIMESTAMP   110 // U8     Enables the timestamp for serial TX.
+#define ADD_REG_MIMIC_PORT0_IR            111 // U8     Specifies the digital output to mimic the Port 0 IR state.
+#define ADD_REG_MIMIC_PORT1_IR            112 // U8     Specifies the digital output to mimic the Port 1 IR state.
+#define ADD_REG_MIMIC_PORT2_IR            113 // U8     Specifies the digital output to mimic the Port 2 IR state.
+#define ADD_REG_RESERVED20                114 // U8     Reserved for future use
+#define ADD_REG_RESERVED21                115 // U8     Reserved for future use
+#define ADD_REG_RESERVED22                116 // U8     Reserved for future use
+#define ADD_REG_MIMIC_PORT0_VALVE         117 // U8     Specifies the digital output to mimic the Port 0 valve state.
+#define ADD_REG_MIMIC_PORT1_VALVE         118 // U8     Specifies the digital output to mimic the Port 1 valve state.
+#define ADD_REG_MIMIC_PORT2_VALVE         119 // U8     Specifies the digital output to mimic the Port 2 valve state.
+#define ADD_REG_RESERVED23                120 // U8     Reserved for future use
+#define ADD_REG_RESERVED24                121 // U8     Reserved for future use
+#define ADD_REG_POKE_INPUT_FILTER         122 // U8     Specifies the low pass filter time value for poke inputs, in ms.
 
 /************************************************************************/
 /* Behavior registers' memory limits                                    */
