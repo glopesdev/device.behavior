@@ -191,6 +191,7 @@ namespace Harp.Behavior
     /// Represents an operator that writes the sequence of <see cref="Behavior"/>" messages
     /// to the standard Harp storage format.
     /// </summary>
+    [DefaultProperty(nameof(Path))]
     [Description("Writes the sequence of Behavior messages to the standard Harp storage format.")]
     public partial class DeviceDataWriter : Sink<HarpMessage>, INamedElement
     {
@@ -5824,9 +5825,9 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
-        public static EncoderModeConfig GetPayload(HarpMessage message)
+        public static EncoderModeMask GetPayload(HarpMessage message)
         {
-            return (EncoderModeConfig)message.GetPayloadByte();
+            return (EncoderModeMask)message.GetPayloadByte();
         }
 
         /// <summary>
@@ -5834,10 +5835,10 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<EncoderModeConfig> GetTimestampedPayload(HarpMessage message)
+        public static Timestamped<EncoderModeMask> GetTimestampedPayload(HarpMessage message)
         {
             var payload = message.GetTimestampedPayloadByte();
-            return Timestamped.Create((EncoderModeConfig)payload.Value, payload.Seconds);
+            return Timestamped.Create((EncoderModeMask)payload.Value, payload.Seconds);
         }
 
         /// <summary>
@@ -5849,7 +5850,7 @@ namespace Harp.Behavior
         /// A <see cref="HarpMessage"/> object for the <see cref="EncoderMode"/> register
         /// with the specified message type and payload.
         /// </returns>
-        public static HarpMessage FromPayload(MessageType messageType, EncoderModeConfig value)
+        public static HarpMessage FromPayload(MessageType messageType, EncoderModeMask value)
         {
             return HarpMessage.FromByte(Address, messageType, (byte)value);
         }
@@ -5865,7 +5866,7 @@ namespace Harp.Behavior
         /// A <see cref="HarpMessage"/> object for the <see cref="EncoderMode"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
-        public static HarpMessage FromPayload(double timestamp, MessageType messageType, EncoderModeConfig value)
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, EncoderModeMask value)
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
@@ -5889,7 +5890,7 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<EncoderModeConfig> GetPayload(HarpMessage message)
+        public static Timestamped<EncoderModeMask> GetPayload(HarpMessage message)
         {
             return EncoderMode.GetTimestampedPayload(message);
         }
@@ -7162,9 +7163,9 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
-        public static byte GetPayload(HarpMessage message)
+        public static SerialTimestampPorts GetPayload(HarpMessage message)
         {
-            return message.GetPayloadByte();
+            return (SerialTimestampPorts)message.GetPayloadByte();
         }
 
         /// <summary>
@@ -7172,9 +7173,10 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<byte> GetTimestampedPayload(HarpMessage message)
+        public static Timestamped<SerialTimestampPorts> GetTimestampedPayload(HarpMessage message)
         {
-            return message.GetTimestampedPayloadByte();
+            var payload = message.GetTimestampedPayloadByte();
+            return Timestamped.Create((SerialTimestampPorts)payload.Value, payload.Seconds);
         }
 
         /// <summary>
@@ -7186,9 +7188,9 @@ namespace Harp.Behavior
         /// A <see cref="HarpMessage"/> object for the <see cref="EnableSerialTimestamp"/> register
         /// with the specified message type and payload.
         /// </returns>
-        public static HarpMessage FromPayload(MessageType messageType, byte value)
+        public static HarpMessage FromPayload(MessageType messageType, SerialTimestampPorts value)
         {
-            return HarpMessage.FromByte(Address, messageType, value);
+            return HarpMessage.FromByte(Address, messageType, (byte)value);
         }
 
         /// <summary>
@@ -7202,9 +7204,9 @@ namespace Harp.Behavior
         /// A <see cref="HarpMessage"/> object for the <see cref="EnableSerialTimestamp"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
-        public static HarpMessage FromPayload(double timestamp, MessageType messageType, byte value)
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, SerialTimestampPorts value)
         {
-            return HarpMessage.FromByte(Address, timestamp, messageType, value);
+            return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
     }
 
@@ -7226,7 +7228,7 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<byte> GetPayload(HarpMessage message)
+        public static Timestamped<SerialTimestampPorts> GetPayload(HarpMessage message)
         {
             return EnableSerialTimestamp.GetTimestampedPayload(message);
         }
@@ -11091,13 +11093,13 @@ namespace Harp.Behavior
         /// Gets or sets the value that configures the operation mode of the quadrature encoders.
         /// </summary>
         [Description("The value that configures the operation mode of the quadrature encoders.")]
-        public EncoderModeConfig EncoderMode { get; set; }
+        public EncoderModeMask EncoderMode { get; set; }
 
         /// <summary>
         /// Creates a message payload for the EncoderMode register.
         /// </summary>
         /// <returns>The created message payload value.</returns>
-        public EncoderModeConfig GetPayload()
+        public EncoderModeMask GetPayload()
         {
             return EncoderMode;
         }
@@ -11643,13 +11645,13 @@ namespace Harp.Behavior
         /// Gets or sets the value that enables the timestamp for serial TX.
         /// </summary>
         [Description("The value that enables the timestamp for serial TX.")]
-        public byte EnableSerialTimestamp { get; set; }
+        public SerialTimestampPorts EnableSerialTimestamp { get; set; }
 
         /// <summary>
         /// Creates a message payload for the EnableSerialTimestamp register.
         /// </summary>
         /// <returns>The created message payload value.</returns>
-        public byte GetPayload()
+        public SerialTimestampPorts GetPayload()
         {
             return EnableSerialTimestamp;
         }
@@ -12258,10 +12260,33 @@ namespace Harp.Behavior
     [Flags]
     public enum DigitalInputs : byte
     {
+        /// <summary>
+        /// Specifies that no flags are defined.
+        /// </summary>
         None = 0x0,
+
+        /// <summary>
+        /// Port 0 digital input
+        /// </summary>
+        [Description("Port 0 digital input")]
         DIPort0 = 0x1,
+
+        /// <summary>
+        /// Port 1 digital input
+        /// </summary>
+        [Description("Port 1 digital input")]
         DIPort1 = 0x2,
+
+        /// <summary>
+        /// Port 2 digital input
+        /// </summary>
+        [Description("Port 2 digital input")]
         DIPort2 = 0x4,
+
+        /// <summary>
+        /// Digital input DI3
+        /// </summary>
+        [Description("Digital input DI3")]
         DI3 = 0x8
     }
 
@@ -12319,11 +12344,39 @@ namespace Harp.Behavior
     [Flags]
     public enum Events : byte
     {
+        /// <summary>
+        /// Specifies that no flags are defined.
+        /// </summary>
         None = 0x0,
+
+        /// <summary>
+        /// Event from register DigitalInputState
+        /// </summary>
+        [Description("Event from register DigitalInputState")]
         PortDI = 0x1,
+
+        /// <summary>
+        /// Event from register PortDIOStateEvent
+        /// </summary>
+        [Description("Event from register PortDIOStateEvent")]
         PortDIO = 0x2,
+
+        /// <summary>
+        /// Event from register AnalogData
+        /// </summary>
+        [Description("Event from register AnalogData")]
         AnalogData = 0x4,
+
+        /// <summary>
+        /// Event from register Camera0Frame
+        /// </summary>
+        [Description("Event from register Camera0Frame")]
         Camera0 = 0x8,
+
+        /// <summary>
+        /// Event from register Camera1Frame
+        /// </summary>
+        [Description("Event from register Camera1Frame")]
         Camera1 = 0x10
     }
 
@@ -12333,8 +12386,21 @@ namespace Harp.Behavior
     [Flags]
     public enum CameraOutputs : byte
     {
+        /// <summary>
+        /// Specifies that no flags are defined.
+        /// </summary>
         None = 0x0,
+
+        /// <summary>
+        /// Camera on digital output 0
+        /// </summary>
+        [Description("Camera on digital output 0")]
         CameraOutput0 = 0x1,
+
+        /// <summary>
+        /// Camera on digital output 1
+        /// </summary>
+        [Description("Camera on digital output 1")]
         CameraOutput1 = 0x2
     }
 
@@ -12344,8 +12410,21 @@ namespace Harp.Behavior
     [Flags]
     public enum ServoOutputs : byte
     {
+        /// <summary>
+        /// Specifies that no flags are defined.
+        /// </summary>
         None = 0x0,
+
+        /// <summary>
+        /// Servo on digital output 2
+        /// </summary>
+        [Description("Servo on digital output 2")]
         ServoOutput2 = 0x4,
+
+        /// <summary>
+        /// Servo on digital output 3
+        /// </summary>
+        [Description("Servo on digital output 3")]
         ServoOutput3 = 0x8
     }
 
@@ -12355,7 +12434,15 @@ namespace Harp.Behavior
     [Flags]
     public enum EncoderInputs : byte
     {
+        /// <summary>
+        /// Specifies that no flags are defined.
+        /// </summary>
         None = 0x0,
+
+        /// <summary>
+        /// Encoder on port 2
+        /// </summary>
+        [Description("Encoder on port 2")]
         EncoderPort2 = 0x4
     }
 
@@ -12365,8 +12452,34 @@ namespace Harp.Behavior
     [Flags]
     public enum FrameAcquired : byte
     {
+        /// <summary>
+        /// Specifies that no flags are defined.
+        /// </summary>
         None = 0x0,
+
+        /// <summary>
+        /// Camera frame was triggered
+        /// </summary>
+        [Description("Camera frame was triggered")]
         FrameAcquired = 0x1
+    }
+
+    /// <summary>
+    /// Specifies available timestamp TX ports.
+    /// </summary>
+    [Flags]
+    public enum SerialTimestampPorts : byte
+    {
+        /// <summary>
+        /// Specifies that no flags are defined.
+        /// </summary>
+        None = 0x0,
+
+        /// <summary>
+        /// Enable the serial timestamp TX on Port 2
+        /// </summary>
+        [Description("Enable the serial timestamp TX on Port 2")]
+        TimestampPort2 = 0x4
     }
 
     /// <summary>
@@ -12375,21 +12488,161 @@ namespace Harp.Behavior
     public enum MimicOutput : byte
     {
         None = 0,
+
+        /// <summary>
+        /// Is reflected on DIO0
+        /// </summary>
+        [Description("Is reflected on DIO0")]
         DIO0 = 1,
+
+        /// <summary>
+        /// Is reflected on DIO1
+        /// </summary>
+        [Description("Is reflected on DIO1")]
         DIO1 = 2,
+
+        /// <summary>
+        /// Is reflected on DIO2
+        /// </summary>
+        [Description("Is reflected on DIO2")]
         DIO2 = 3,
+
+        /// <summary>
+        /// Is reflected on DO0
+        /// </summary>
+        [Description("Is reflected on DO0")]
         DO0 = 4,
+
+        /// <summary>
+        /// Is reflected on DO1
+        /// </summary>
+        [Description("Is reflected on DO1")]
         DO1 = 5,
+
+        /// <summary>
+        /// Is reflected on DO2
+        /// </summary>
+        [Description("Is reflected on DO2")]
         DO2 = 6,
+
+        /// <summary>
+        /// Is reflected on DO3
+        /// </summary>
+        [Description("Is reflected on DO3")]
         DO3 = 7
     }
 
     /// <summary>
     /// Specifies the type of reading made from the quadrature encoder.
     /// </summary>
-    public enum EncoderModeConfig : byte
+    public enum EncoderModeMask : byte
     {
         Position = 0,
         Displacement = 1
+    }
+
+    internal static partial class PayloadMarshal
+    {
+        internal static T[] GetSubArray<T>(T[] array, int offset, int count)
+        {
+            var result = new T[count];
+            Array.Copy(array, offset, result, 0, count);
+            return result;
+        }
+
+        internal static byte ReadByte(ArraySegment<byte> segment) => segment.Array[segment.Offset];
+
+        internal static sbyte ReadSByte(ArraySegment<byte> segment) => (sbyte)segment.Array[segment.Offset];
+
+        internal static ushort ReadUInt16(ArraySegment<byte> segment) => BitConverter.ToUInt16(segment.Array, segment.Offset);
+
+        internal static short ReadInt16(ArraySegment<byte> segment) => BitConverter.ToInt16(segment.Array, segment.Offset);
+
+        internal static uint ReadUInt32(ArraySegment<byte> segment) => BitConverter.ToUInt32(segment.Array, segment.Offset);
+
+        internal static int ReadInt32(ArraySegment<byte> segment) => BitConverter.ToInt32(segment.Array, segment.Offset);
+
+        internal static ulong ReadUInt64(ArraySegment<byte> segment) => BitConverter.ToUInt64(segment.Array, segment.Offset);
+
+        internal static long ReadInt64(ArraySegment<byte> segment) => BitConverter.ToInt64(segment.Array, segment.Offset);
+
+        internal static float ReadSingle(ArraySegment<byte> segment) => BitConverter.ToSingle(segment.Array, segment.Offset);
+
+        internal static string ReadUtf8String(ArraySegment<byte> segment)
+        {
+            var count = Array.IndexOf(segment.Array, (byte)0, segment.Offset, segment.Count) - segment.Offset;
+            return System.Text.Encoding.UTF8.GetString(segment.Array, segment.Offset, count < 0 ? segment.Count : count);
+        }
+
+        internal static void Write(ArraySegment<byte> segment, byte value) => segment.Array[segment.Offset] = value;
+
+        internal static void Write(ArraySegment<byte> segment, sbyte value) => segment.Array[segment.Offset] = (byte)value;
+
+        internal static void Write(ArraySegment<byte> segment, ushort value)
+        {
+            segment.Array[segment.Offset] = (byte)value;
+            segment.Array[segment.Offset + 1] = (byte)(value >> 8);
+        }
+
+        internal static void Write(ArraySegment<byte> segment, short value)
+        {
+            segment.Array[segment.Offset] = (byte)value;
+            segment.Array[segment.Offset + 1] = (byte)(value >> 8);
+        }
+
+        internal static void Write(ArraySegment<byte> segment, uint value)
+        {
+            segment.Array[segment.Offset] = (byte)value;
+            segment.Array[segment.Offset + 1] = (byte)(value >> 8);
+            segment.Array[segment.Offset + 2] = (byte)(value >> 16);
+            segment.Array[segment.Offset + 3] = (byte)(value >> 24);
+        }
+
+        internal static void Write(ArraySegment<byte> segment, int value)
+        {
+            segment.Array[segment.Offset] = (byte)value;
+            segment.Array[segment.Offset + 1] = (byte)(value >> 8);
+            segment.Array[segment.Offset + 2] = (byte)(value >> 16);
+            segment.Array[segment.Offset + 3] = (byte)(value >> 24);
+        }
+
+        internal static void Write(ArraySegment<byte> segment, ulong value)
+        {
+            segment.Array[segment.Offset] = (byte)value;
+            segment.Array[segment.Offset + 1] = (byte)(value >> 8);
+            segment.Array[segment.Offset + 2] = (byte)(value >> 16);
+            segment.Array[segment.Offset + 3] = (byte)(value >> 24);
+            segment.Array[segment.Offset + 4] = (byte)(value >> 32);
+            segment.Array[segment.Offset + 5] = (byte)(value >> 40);
+            segment.Array[segment.Offset + 6] = (byte)(value >> 48);
+            segment.Array[segment.Offset + 7] = (byte)(value >> 56);
+        }
+
+        internal static void Write(ArraySegment<byte> segment, long value)
+        {
+            segment.Array[segment.Offset] = (byte)value;
+            segment.Array[segment.Offset + 1] = (byte)(value >> 8);
+            segment.Array[segment.Offset + 2] = (byte)(value >> 16);
+            segment.Array[segment.Offset + 3] = (byte)(value >> 24);
+            segment.Array[segment.Offset + 4] = (byte)(value >> 32);
+            segment.Array[segment.Offset + 5] = (byte)(value >> 40);
+            segment.Array[segment.Offset + 6] = (byte)(value >> 48);
+            segment.Array[segment.Offset + 7] = (byte)(value >> 56);
+        }
+
+        internal static unsafe void Write(ArraySegment<byte> segment, float value) => Write(segment, *(int*)&value);
+
+        internal static unsafe void Write(ArraySegment<byte> segment, string value) =>
+            System.Text.Encoding.UTF8.GetBytes(value, 0, Math.Min(value.Length, segment.Count), segment.Array, segment.Offset);
+
+        internal static void Write<T>(ArraySegment<byte> segment, T[] values) where T : unmanaged
+        {
+            Buffer.BlockCopy(values, 0, segment.Array, segment.Offset, segment.Count);
+        }
+
+        internal static void Write<T>(ArraySegment<T> segment, T[] values)
+        {
+            Array.Copy(values, 0, segment.Array, segment.Offset, segment.Count);
+        }
     }
 }

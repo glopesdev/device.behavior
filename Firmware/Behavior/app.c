@@ -159,29 +159,29 @@ void core_callback_reset_registers(void)
 	//app_regs.REG_PORTS_IN = 0;
     //app_regs.REG_POKE_DIG_IN = 0;
     
-    app_regs.REG_OUTPUTS_SET = 0;
-    app_regs.REG_OUTPUTS_CLEAR = 0;
-    app_regs.REG_OUTPUTS_TOGGLE = 0;
-    app_regs.REG_OUTPUTS_OUT = 0;
+    app_regs.REG_OUTPUT_SET = 0;
+    app_regs.REG_OUTPUT_CLEAR = 0;
+    app_regs.REG_OUTPUT_TOGGLE = 0;
+    app_regs.REG_OUTPUT_STATE = 0;
     
-    app_regs.REG_PORT_DIOS_SET = 0;
-    app_regs.REG_PORT_DIOS_CLEAR = 0;
-    app_regs.REG_PORT_DIOS_TOGGLE = 0;
-    app_regs.REG_PORT_DIOS_OUT = 0;
-    app_regs.REG_PORT_DIOS_CONF = 0; // All as inputs
-    //app_regs.REG_PORT_DIOS_IN = 0;
+    app_regs.REG_PORT_DIO_SET = 0;
+    app_regs.REG_PORT_DIO_CLEAR = 0;
+    app_regs.REG_PORT_DIO_TOGGLE = 0;
+    app_regs.REG_PORT_DIO_STATE = 0;
+    app_regs.REG_PORT_DIO_DIRECTION = 0; // All as inputs
+    //app_regs.REG_PORT_DIO_STATE_EVENT = 0;
     
-    //app_regs.REG_DATA[0] = 0;
-	 app_regs.REG_DATA[1] = 0;
+    //app_regs.REG_ANALOG_DATA[0] = 0;
+	 app_regs.REG_ANALOG_DATA[1] = 0;
     
-    app_regs.REG_OUTPUT_PULSE_EN = B_PORT0_12V | B_PORT1_12V | B_PORT2_12V;
+    app_regs.REG_OUTPUT_PULSE_ENABLE = B_SUPPLY_PORT0 | B_SUPPLY_PORT1 | B_SUPPLY_PORT2;
 
-    app_regs.REG_PULSE_PORT0_DO = 500;
-    app_regs.REG_PULSE_PORT1_DO = 500;
-    app_regs.REG_PULSE_PORT2_DO = 500;
-    app_regs.REG_PULSE_PORT0_12V = 15;
-    app_regs.REG_PULSE_PORT1_12V = 15;
-    app_regs.REG_PULSE_PORT2_12V = 15;
+    app_regs.REG_PULSE_DO_PORT0 = 500;
+    app_regs.REG_PULSE_DO_PORT1 = 500;
+    app_regs.REG_PULSE_DO_PORT2 = 500;
+    app_regs.REG_PULSE_SUPPLY_PORT0 = 15;
+    app_regs.REG_PULSE_SUPPLY_PORT1 = 15;
+    app_regs.REG_PULSE_SUPPLY_PORT2 = 15;
     app_regs.REG_PULSE_LED0 = 500;
     app_regs.REG_PULSE_LED1 = 500;
     app_regs.REG_PULSE_RGB0 = 500;
@@ -191,25 +191,25 @@ void core_callback_reset_registers(void)
     app_regs.REG_PULSE_DO2 = 250;
     app_regs.REG_PULSE_DO3 = 250;
     
-    app_regs.REG_FREQ_DO0 = 1000;
-    app_regs.REG_FREQ_DO1 = 2000;
-    app_regs.REG_FREQ_DO2 = 3000;
-    app_regs.REG_FREQ_DO3 = 4000;
+    app_regs.REG_PWM_FREQUENCY_DO0 = 1000;
+    app_regs.REG_PWM_FREQUENCY_DO1 = 2000;
+    app_regs.REG_PWM_FREQUENCY_DO2 = 3000;
+    app_regs.REG_PWM_FREQUENCY_DO3 = 4000;
     
-    app_regs.REG_DCYCLE_DO0 = 50;
-    app_regs.REG_DCYCLE_DO1 = 50;
-    app_regs.REG_DCYCLE_DO2 = 50;
-    app_regs.REG_DCYCLE_DO3 = 50;
+    app_regs.REG_PWM_DUTY_CYCLE_DO0 = 50;
+    app_regs.REG_PWM_DUTY_CYCLE_DO1 = 50;
+    app_regs.REG_PWM_DUTY_CYCLE_DO2 = 50;
+    app_regs.REG_PWM_DUTY_CYCLE_DO3 = 50;
     
     app_regs.REG_PWM_START = 0;
     app_regs.REG_PWM_STOP = 0;
     
-    app_regs.REG_RGBS[0] = 255;  // Green
-    app_regs.REG_RGBS[1] = 0;		// Red
-    app_regs.REG_RGBS[2] = 0;		// Blue
-    app_regs.REG_RGBS[3] = 0;		// Green
-    app_regs.REG_RGBS[4] = 0;		// Red
-    app_regs.REG_RGBS[5] = 255;  // Blue
+    app_regs.REG_RGB_ALL[0] = 255;  // Green
+    app_regs.REG_RGB_ALL[1] = 0;		// Red
+    app_regs.REG_RGB_ALL[2] = 0;		// Blue
+    app_regs.REG_RGB_ALL[3] = 0;		// Green
+    app_regs.REG_RGB_ALL[4] = 0;		// Red
+    app_regs.REG_RGB_ALL[5] = 255;  // Blue
     
     app_regs.REG_RGB0[0] = 255;  // Green
     app_regs.REG_RGB0[1] = 0;		// Red
@@ -224,23 +224,23 @@ void core_callback_reset_registers(void)
     app_regs.REG_LED0_MAX_CURRENT = 30;
     app_regs.REG_LED1_MAX_CURRENT = 30;
     
-    app_regs.REG_EVNT_ENABLE = B_EVT_PORT_DIS | B_EVT_PORT_DIOS_IN | B_EVT_DATA | B_EVT_CAM0 | B_EVT_CAM1;
+    app_regs.REG_EVENT_ENABLE = B_PORT_DI | B_PORT_DIO | B_ANALOG_DATA | B_CAMERA0 | B_CAMERA1;
     
     app_regs.REG_START_CAMERAS = 0;
 	 app_regs.REG_STOP_CAMERAS = 0;
-    app_regs.REG_EN_SERVOS = 0;
-	 app_regs.REG_DIS_SERVOS = 0;
-    app_regs.REG_EN_ENCODERS = 0;
+    app_regs.REG_ENABLE_SERVOS = 0;
+	 app_regs.REG_DISABLE_SERVOS = 0;
+    app_regs.REG_ENABLE_ENCODERS = 0;
     
-    app_regs.REG_CAM_OUT0_FREQ = 30;
-    app_regs.REG_CAM_OUT1_FREQ = 30;
+    app_regs.REG_CAMERA0_FREQUENCY = 30;
+    app_regs.REG_CAMERA1_FREQUENCY = 30;
     
-    app_regs.REG_MOTOR_OUT2_PERIOD = 20000;
-    app_regs.REG_MOTOR_OUT2_PULSE = 1500;
-    app_regs.REG_MOTOR_OUT3_PERIOD = 20000;
-    app_regs.REG_MOTOR_OUT3_PULSE = 1500;
+    app_regs.REG_SERVO_MOTOR2_PERIOD = 20000;
+    app_regs.REG_SERVO_MOTOR2_PULSE = 1500;
+    app_regs.REG_SERVO_MOTOR3_PERIOD = 20000;
+    app_regs.REG_SERVO_MOTOR3_PULSE = 1500;
 	
-	app_regs.REG_POKE_INPUT_FILTER_MS = 1;
+	app_regs.REG_POKE_INPUT_FILTER = 1;
 }
 
 extern ports_state_t _states_;
@@ -266,28 +266,28 @@ void core_callback_registers_were_reinitialized(void)
     _states_.quad_counter.port1 = false;
     _states_.quad_counter.port2 = false;
     
-    aux16b  = app_regs.REG_OUTPUTS_OUT;
-    app_write_REG_OUTPUTS_OUT(&aux16b);
+    aux16b  = app_regs.REG_OUTPUT_STATE;
+    app_write_REG_OUTPUT_STATE(&aux16b);
     
     aux8b = app_regs.REG_LED0_CURRENT;
     app_write_REG_LED0_CURRENT(&aux8b);
     aux8b = app_regs.REG_LED1_CURRENT;
     app_write_REG_LED1_CURRENT(&aux8b);
     
-    aux16b = app_regs.REG_FREQ_DO0;
-    app_write_REG_FREQ_DO0(&aux16b);
-    aux16b = app_regs.REG_FREQ_DO1;
-    app_write_REG_FREQ_DO1(&aux16b);
-    aux16b = app_regs.REG_FREQ_DO2;
-    app_write_REG_FREQ_DO2(&aux16b);
-    aux16b = app_regs.REG_FREQ_DO3;
-    app_write_REG_FREQ_DO3(&aux16b);
+    aux16b = app_regs.REG_PWM_FREQUENCY_DO0;
+    app_write_REG_PWM_FREQUENCY_DO0(&aux16b);
+    aux16b = app_regs.REG_PWM_FREQUENCY_DO1;
+    app_write_REG_PWM_FREQUENCY_DO1(&aux16b);
+    aux16b = app_regs.REG_PWM_FREQUENCY_DO2;
+    app_write_REG_PWM_FREQUENCY_DO2(&aux16b);
+    aux16b = app_regs.REG_PWM_FREQUENCY_DO3;
+    app_write_REG_PWM_FREQUENCY_DO3(&aux16b);
     
     aux8b = app_regs.REG_PWM_START;
     app_write_REG_PWM_START(&aux8b);
     
-    aux8b = app_regs.REG_EN_ENCODERS;
-    app_write_REG_EN_ENCODERS(&aux8b);
+    aux8b = app_regs.REG_ENABLE_ENCODERS;
+    app_write_REG_ENABLE_ENCODERS(&aux8b);
     
     aux8b = app_regs.REG_MIMIC_PORT0_IR;
     app_write_REG_MIMIC_PORT0_IR(&aux8b);
@@ -303,7 +303,7 @@ void core_callback_registers_were_reinitialized(void)
     aux8b = app_regs.REG_MIMIC_PORT2_VALVE;
     app_write_REG_MIMIC_PORT2_VALVE(&aux8b);
 	
-	app_regs.REG_POKE_INPUT_FILTER_MS = 1;	
+	app_regs.REG_POKE_INPUT_FILTER = 1;	
 }
 
 /************************************************************************/
@@ -313,7 +313,7 @@ void core_callback_visualen_to_on(void) {}
 void core_callback_visualen_to_off(void) {}
 
 /************************************************************************/
-/* Callbacks: Change on the operation mode                              */
+/* Callbacks: Change to the operation mode                              */
 /************************************************************************/
 extern bool stop_camera_do0;
 extern bool stop_camera_do1;
@@ -370,24 +370,24 @@ void core_callback_t_before_exec(void)
        ADCA_CH0_CTRL |= ADC_CH_START_bm;
        
        /* Read encoder on Port 2 */
-       if (app_regs.REG_EN_ENCODERS & B_EN_ENCODER_PORT2)
+       if (app_regs.REG_ENABLE_ENCODERS & B_ENCODER_PORT2)
        {
            int16_t timer_cnt = TCD1_CNT;
            
-           if (app_regs.REG_CONF_ENCODERS == GM_POSITION)
+           if (app_regs.REG_ENCODER_MODE == GM_ENCODER_MODE_POSITION)
 			  {               
                if (timer_cnt > 32768)
                {
-                   app_regs.REG_DATA[1] = 0xFFFF - timer_cnt;
+                   app_regs.REG_ANALOG_DATA[1] = 0xFFFF - timer_cnt;
                }
                else
                {
-					    app_regs.REG_DATA[1] = (32768 - timer_cnt) * -1;
+					    app_regs.REG_ANALOG_DATA[1] = (32768 - timer_cnt) * -1;
                }
 			  }
 			  else
 			  {
-			        app_regs.REG_DATA[1] = previous_encoder_poke2 - timer_cnt;			        
+			        app_regs.REG_ANALOG_DATA[1] = previous_encoder_poke2 - timer_cnt;			        
 					  
 			        previous_encoder_poke2 = timer_cnt;
 			  }
@@ -512,7 +512,7 @@ void core_callback_t_1ms(void)
 }
 
 /************************************************************************/
-/* Callbacks: cloc control                                              */
+/* Callbacks: clock control                                             */
 /************************************************************************/
 void core_callback_clock_to_repeater(void) {}
 void core_callback_clock_to_generator(void) {}

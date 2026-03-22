@@ -26,7 +26,7 @@
 #define MAJOR_FW_VERSION 3
 #endif
 #ifndef MINOR_FW_VERSION
-#define MINOR_FW_VERSION 3
+#define MINOR_FW_VERSION 4
 #endif
 #ifndef PATCH_FW_VERSION
 #define PATCH_FW_VERSION 0
