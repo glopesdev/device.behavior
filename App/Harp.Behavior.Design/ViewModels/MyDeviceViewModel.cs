@@ -248,7 +248,7 @@ public class BehaviorViewModel : ViewModelBase
     [Reactive] public ServoOutputs EnableServos { get; set; }
     [Reactive] public ServoOutputs DisableServos { get; set; }
     [Reactive] public EncoderInputs EnableEncoders { get; set; }
-    [Reactive] public EncoderModeConfig EncoderMode { get; set; }
+    [Reactive] public EncoderModeMask EncoderMode { get; set; }
     [Reactive] public FrameAcquired Camera0Frame { get; set; }
     [Reactive] public ushort Camera0Frequency { get; set; }
     [Reactive] public FrameAcquired Camera1Frame { get; set; }
@@ -258,7 +258,7 @@ public class BehaviorViewModel : ViewModelBase
     [Reactive] public ushort ServoMotor3Period { get; set; }
     [Reactive] public ushort ServoMotor3Pulse { get; set; }
     [Reactive] public EncoderInputs EncoderReset { get; set; }
-    [Reactive] public byte EnableSerialTimestamp { get; set; }
+    [Reactive] public SerialTimestampPorts EnableSerialTimestamp { get; set; }
     [Reactive] public MimicOutput MimicPort0IR { get; set; }
     [Reactive] public MimicOutput MimicPort1IR { get; set; }
     [Reactive] public MimicOutput MimicPort2IR { get; set; }
