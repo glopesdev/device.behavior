@@ -40,7 +40,7 @@ jobs:
 
       # ----------------------------------------------------------------------- Build firmware
       - name: Build firmware
-        working-directory: Firmware/Behavior
+        working-directory: firmware/Behavior
         id: build
         shell: bash
         run: make all FIRMWARE_VERSION=${{env.CiBuildVersion}} HARDWARE_VERSION=${{matrix.hardware-target}} PREVIEW_VERSION=${{env.CiFirmwarePreviewVersion}}
@@ -52,12 +52,12 @@ jobs:
         with:
           name: Firmware-hw${{matrix.hardware-target}}
           if-no-files-found: error
-          path: Firmware/Behavior/bin/*.hex
+          path: firmware/Behavior/bin/*.hex
 
       # ----------------------------------------------------------------------- Upload release assets
       - name: Upload release assets
         if: github.event_name == 'release'
-        run: gh release upload --repo ${{github.repository}} ${{github.event.release.tag_name}} Firmware/Behavior/bin/*.hex --clobber
+        run: gh release upload --repo ${{github.repository}} ${{github.event.release.tag_name}} firmware/Behavior/bin/*.hex --clobber
         env:
           GH_TOKEN: ${{github.token}}
 
@@ -92,7 +92,7 @@ jobs:
 
       # ----------------------------------------------------------------------- Regenerate
       - name: Run generators
-        run: dotnet harp.toolkit generate interface -o Interface/${{github.workflow}}
+        run: dotnet harp.toolkit generate interface -o software/${{github.workflow}}
 
       - name: Verify pre-generated code was up-to-date
         id: verify-dist
@@ -102,14 +102,14 @@ jobs:
 
       # ----------------------------------------------------------------------- Build interface package
       - name: Restore interface
-        run: dotnet restore Interface
+        run: dotnet restore software
 
       - name: Build interface
-        run: dotnet build Interface --no-restore --configuration ${{matrix.configuration}}
+        run: dotnet build software --no-restore --configuration ${{matrix.configuration}}
 
       - name: Pack interface
         id: pack
-        run: dotnet pack Interface --no-restore --no-build --configuration ${{matrix.configuration}}
+        run: dotnet pack software --no-restore --no-build --configuration ${{matrix.configuration}}
 
       # ----------------------------------------------------------------------- Collect artifacts
       - name: Collect NuGet packages
@@ -118,12 +118,12 @@ jobs:
         with:
           name: Packages
           if-no-files-found: error
-          path: Interface/bin/${{matrix.configuration}}/**
+          path: software/bin/${{matrix.configuration}}/**
 
       # ----------------------------------------------------------------------- Upload release assets
       - name: Upload release assets
         if: github.event_name == 'release' && matrix.configuration == 'Release'
-        run: gh release upload --repo ${{github.repository}} ${{github.event.release.tag_name}} Interface/bin/${{matrix.configuration}}/** --clobber
+        run: gh release upload --repo ${{github.repository}} ${{github.event.release.tag_name}} software/bin/${{matrix.configuration}}/** --clobber
         env:
           GH_TOKEN: ${{github.token}}
 
