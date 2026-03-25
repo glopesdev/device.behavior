@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <!--If you are willing to use Windows/MacOS native APIs you will need to create 3 projects.
-    One for Windows with net8.0-windows TFM, one for MacOS with net8.0-macos and one with net8.0 TFM for Linux.-->
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>harp.behavior</ToolCommandName>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
@@ -31,10 +31,10 @@
   </PropertyGroup>
 
   <Target Name="CopyAssets" AfterTargets="Build">
-    <Copy SourceFiles="..\Harp.Behavior.Design\Assets\logo.icns" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true"/>
-    <Copy SourceFiles="..\Harp.Behavior.Design\Assets\logo.ico" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true"/>
-    <Copy SourceFiles="..\Harp.Behavior.Design\Assets\logo.icns" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true"/>
-    <Copy SourceFiles="..\Harp.Behavior.Design\Assets\logo.ico" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true"/>
+    <Copy SourceFiles="..\Harp.Behavior.Design\Assets\logo.icns" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="..\Harp.Behavior.Design\Assets\logo.ico" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="..\Harp.Behavior.Design\Assets\logo.icns" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="..\Harp.Behavior.Design\Assets\logo.ico" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true" />
   </Target>
 
   <UsingTask
