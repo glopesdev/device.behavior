@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Visual tool for configuring Harp Behavior devices.</Description>
+    <PackageTags>$(PackageTags) App</PackageTags>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+    <OutputType>WinExe</OutputType>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>harp.behavior</ToolCommandName>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>..\Harp.Behavior.Design\Assets\logo.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Harp.Behavior.Design\Harp.Behavior.Design.csproj" />
+  </ItemGroup>
+</Project>
